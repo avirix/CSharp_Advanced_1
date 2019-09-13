@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Collections
+namespace ITEA_Collections
 {
     class Program
     {
