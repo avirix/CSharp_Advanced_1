@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace ITEA_Collections.Common
+﻿namespace ITEA_Collections.Common
 {
-    public interface IBaseCollectionUsing<T>
+    internal interface IBaseCollectionUsing
     {
-        void Create();
-        void Add(T ts);
-        void AddMany(IEnumerable<T> ts);
-        T Get(int index);
-        IEnumerable<T> GetAll();
+        void Add(object ts);
+        void AddMany(object[] ts);
+        object GetByID(int index);
+        void RemoveByID(int index);
+        object[] GetAll();
         void Clear();
+        void ShowAll();
     }
 }

@@ -1,42 +1,75 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 
 using ITEA_Collections.Common;
 
+using static ITEA_Collections.Common.Extensions;
+
 namespace ITEA_Collections.Usings
 {
-    internal class ArrayListUsing : BaseMethods<object>, IBaseCollectionUsing<object>
+    internal class ArrayListUsing : IBaseCollectionUsing
     {
-        public ArrayList BookList { get; set; }
+        public ArrayList List { get; set; }
 
-        public void Create()
+        public ArrayListUsing()
         {
-            BookList = new ArrayList();
+            List = new ArrayList();
         }
 
         public void Add(object ts)
         {
-            BookList.Add(ts);
+            List.Add(ts);
         }
 
-        public void AddMany(IEnumerable<object> ts)
+        public void AddMany(object[] ts)
         {
-            BookList.AddRange((ICollection)ts);
+            if (ts is null)
+                ToConsole($"Array is null!", ConsoleColor.Red);
+            else
+                List.AddRange(ts);
+
         }
 
         public void Clear()
         {
-            BookList.Clear();
+            List.Clear();
         }
 
-        public object Get(int index)
+        public object GetByID(int index)
         {
-            return BookList[index];
+            try
+            {
+                return List[index];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                ToConsole($"No element with index: {index}", ConsoleColor.Red);
+                return null;
+            }
         }
 
-        public IEnumerable<object> GetAll()
+        public void RemoveByID(int index)
         {
-            return (IEnumerable<object>)BookList.GetRange(0, -1);
+            try
+            {
+                List.RemoveAt(index);
+                ToConsole($"Successfully removed #{index}", ConsoleColor.DarkYellow);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                ToConsole($"No element with index: {index}", ConsoleColor.Red);
+            }
+        }
+
+        public object[] GetAll()
+        {
+            return List.GetRange(0, List.Count).ToArray();
+        }
+
+        public void ShowAll()
+        {
+            foreach (var item in GetAll())
+                ToConsole($"{List.IndexOf(item)}: {item}, type - {item.GetType().Name}", ConsoleColor.Cyan);
         }
     }
 }
