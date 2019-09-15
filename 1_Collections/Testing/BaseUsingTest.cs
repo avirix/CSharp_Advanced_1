@@ -16,6 +16,8 @@ namespace ITEA_Collections.Testing
             {
                 collectionUsing.Add("1");
                 collectionUsing.AddMany(p);
+                if (!collectionUsing.GetAll().Any())
+                    throw new Exception("Test failed, Add/AddMany");
                 collectionUsing.RemoveByID(15);
                 var i1 = collectionUsing.GetByID(1);
                 collectionUsing.RemoveByID(1);
