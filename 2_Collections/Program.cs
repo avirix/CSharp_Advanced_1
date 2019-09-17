@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace ITEA_Collections
 {
@@ -6,7 +8,9 @@ namespace ITEA_Collections
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
+
+
         }
     }
 }

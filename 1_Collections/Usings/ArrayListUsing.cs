@@ -41,8 +41,9 @@ namespace ITEA_Collections.Usings
             {
                 return List[index];
             }
-            catch (ArgumentOutOfRangeException)
+            catch (Exception ex)
             {
+                ToConsole(ex.GetType().Name + ex.Message);
                 ToConsole($"No element with index: {index}", ConsoleColor.Red);
                 return null;
             }
