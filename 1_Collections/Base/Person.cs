@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ITEA_Collections.Base
 {
-    internal class Person : object
+    public class Person : object
     {
         public string Name { get; set; }
         public int Age { get; set; }

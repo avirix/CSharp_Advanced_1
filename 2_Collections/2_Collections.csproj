@@ -6,4 +6,8 @@
     <RootNamespace>ITEA_Collections</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\1_Collections\1_Collections.csproj" />
+  </ItemGroup>
+
 </Project>

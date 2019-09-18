@@ -1,6 +1,6 @@
 ﻿namespace ITEA_Collections.Common
 {
-    internal interface IBaseCollectionUsing
+    public interface IBaseCollectionUsing
     {
         void Add(object ts);
         void AddMany(object[] ts);

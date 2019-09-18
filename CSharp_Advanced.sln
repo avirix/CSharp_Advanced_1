@@ -5,7 +5,10 @@ VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1_Collections", "1_Collections\1_Collections.csproj", "{B3BCA9B7-0154-4566-83AB-4521ABB980E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2_Collections", "2_Collections\2_Collections.csproj", "{D0366063-5CB1-4347-ABB7-2DD0E189D703}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2_Collections", "2_Collections\2_Collections.csproj", "{D0366063-5CB1-4347-ABB7-2DD0E189D703}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B3BCA9B7-0154-4566-83AB-4521ABB980E4} = {B3BCA9B7-0154-4566-83AB-4521ABB980E4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
