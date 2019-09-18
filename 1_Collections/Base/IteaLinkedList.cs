@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ITEA_Collections.Base
 {
@@ -13,6 +11,21 @@ namespace ITEA_Collections.Base
         public IteaLinkedList(Message message)
         {
             Head = message;
+        }
+
+        public string this[int index]
+        {
+            get
+            {
+                int i = 0;
+                Message current = Head;
+                while (i < index && current.Next != null)
+                {
+                    i++;
+                    current = current.Next;
+                }
+                return current.Content;
+            }
         }
 
         private Message GetLast()
@@ -49,7 +62,7 @@ namespace ITEA_Collections.Base
         public Message RemoveLast()
         {
             Message last = GetLast();
-            if(last != Head)
+            if (last != Head)
             {
                 last.Previous.Next = null;
             }
@@ -60,7 +73,7 @@ namespace ITEA_Collections.Base
         {
             string str = $"{Head?.Content}; ";
             Message current = Head;
-            while(current?.Next != null)
+            while (current?.Next != null)
             {
                 str += $"{current.Next.Content}; ";
                 current = current.Next;

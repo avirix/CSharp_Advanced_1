@@ -18,6 +18,7 @@ namespace ITEA_Collections
             UseEnumerator(numbers);
             UseList(numbers);
             UseObservable();
+            UseWeirdYield();
         }
 
         static void UseCollection(object[] objects)
@@ -116,6 +117,31 @@ namespace ITEA_Collections
                     string replacingRerson = e.NewItems[0] as string;
                     ToConsole($"{replacedPerson} replaced by {replacingRerson}", ConsoleColor.Yellow);
                     break;
+            }
+        }
+
+        private class Number
+        {
+            private static int n = 0;
+            public int N { get => ++n; }
+        }
+
+        static void UseWeirdYield()
+        {
+            Number i = new Number();
+            var myEn = CreateIntEnumerable(i);//.ToList();
+            foreach (var item in myEn)
+                ToConsoleLine($"{item}; ", ConsoleColor.Cyan);
+            Console.WriteLine();
+            foreach (var item in myEn)
+                ToConsoleLine($"{item}; ", ConsoleColor.Cyan);
+        }
+
+        private static IEnumerable<int> CreateIntEnumerable(Number k)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                yield return k.N;
             }
         }
     }

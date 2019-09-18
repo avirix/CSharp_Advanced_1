@@ -76,6 +76,15 @@ namespace ITEA_Collections.CustomCollections
             {
                 yield return item;
             }
-        }  
+        }
+
+        public IEnumerable<string> ToEnumerableOnlyStrings()
+        {
+            foreach (var item in collection)
+            {
+                if(item is string i)
+                    yield return i;
+            }
+        }
     }
 }
