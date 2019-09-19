@@ -24,7 +24,21 @@ namespace ITEA_Collections
             Additional();
             #region Homework
             IBaseCollectionUsing collectionUsing = new ArrayListUsing();
+            IBaseCollectionUsing collectionUsingList = new GenericListUsing();
+            IBaseCollectionUsing collectionUsingDictionary = new DictionaryUsing();
             BaseUsingTest.Execute(ref collectionUsing);
+            BaseUsingTest.Execute(ref collectionUsingList);
+            BaseUsingTest.Execute(ref collectionUsingDictionary);
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    collectionUsingDictionary.Add(i);
+            //}
+            //collectionUsingDictionary.GetByID(1);
+            //collectionUsingDictionary.RemoveByID(1);
+            //collectionUsingDictionary.ShowAll();
+            //collectionUsingDictionary.GetAll();
+            //collectionUsingDictionary.Clear();
+            
             #endregion
         }
 

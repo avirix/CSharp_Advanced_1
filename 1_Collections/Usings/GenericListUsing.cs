@@ -16,37 +16,61 @@ namespace ITEA_Collections.Usings
 
         public void Add(object ts)
         {
-            throw new NotImplementedException();
+            List.Add(ts.ToString());
         }
 
         public void AddMany(object[] ts)
         {
-            throw new NotImplementedException();
+            if (ts is null)
+                Extensions.ToConsole($"Array is null!", ConsoleColor.Red);
+            else
+            {
+                string[] vs = Array.ConvertAll(ts, x => x.ToString());
+                List.AddRange(vs);
+            }
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            List.Clear();
         }
 
         public object[] GetAll()
         {
-            throw new NotImplementedException();
+            return List.GetRange(0, List.Count).ToArray(); //CHECK IT!!!!!!!!!!!!!!
         }
 
         public object GetByID(int index)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return List[index];
+            }
+            catch (Exception ex)
+            {
+                Extensions.ToConsole(ex.GetType().Name + ex.Message);
+                Extensions.ToConsole($"No element with index: {index}", ConsoleColor.Red);
+                return null;
+            }
         }
 
         public void RemoveByID(int index)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List.RemoveAt(index);
+                Extensions.ToConsole($"Successfully removed #{index}", ConsoleColor.DarkYellow);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Extensions.ToConsole($"No element with index: {index}", ConsoleColor.Red);
+            }
         }
 
         public void ShowAll()
         {
-            throw new NotImplementedException();
+            foreach (var item in GetAll())
+                Extensions.ToConsole($"{List.IndexOf((string)item)}: {item}, type - {item.GetType().Name}", ConsoleColor.Cyan);
         }
     }
 }

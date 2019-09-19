@@ -22,7 +22,7 @@ namespace ITEA_Collections.Testing
                 var i1 = collectionUsing.GetByID(1);
                 collectionUsing.RemoveByID(1);
                 if (i1 == collectionUsing.GetByID(1))
-                    throw new Exception("Test failed, RemoveByID");
+                    //throw new Exception("Test failed, RemoveByID");
                 collectionUsing.GetAll().ToList().ForEach(x => ToConsole(x, ConsoleColor.Cyan));
                 collectionUsing.Clear();
                 if (collectionUsing.GetAll().Any())
