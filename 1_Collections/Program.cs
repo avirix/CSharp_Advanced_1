@@ -19,26 +19,74 @@ namespace ITEA_Collections
             var str = "Hello world";
             Console.WriteLine(string.Concat(str.Reverse()));
             str.ToList().ForEach(x => Console.WriteLine(x));
+            bool exit = false;
             //BaseExamples();
             //Lesson();
             Additional();
             #region Homework
             IBaseCollectionUsing collectionUsing = new ArrayListUsing();
             IBaseCollectionUsing collectionUsingList = new GenericListUsing();
-            IBaseCollectionUsing collectionUsingDictionary = new DictionaryUsing();
+            Console.WriteLine("Enter first index: ");
+            int test = Convert.ToInt32(Console.ReadLine());
+            IBaseCollectionUsing collectionUsingDictionary = new DictionaryUsing(test);
+
+
             BaseUsingTest.Execute(ref collectionUsing);
             BaseUsingTest.Execute(ref collectionUsingList);
             BaseUsingTest.Execute(ref collectionUsingDictionary);
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    collectionUsingDictionary.Add(i);
-            //}
-            //collectionUsingDictionary.GetByID(1);
-            //collectionUsingDictionary.RemoveByID(1);
-            //collectionUsingDictionary.ShowAll();
-            //collectionUsingDictionary.GetAll();
-            //collectionUsingDictionary.Clear();
-            
+            Console.WriteLine("Commands: Add, AddMany, GetAll, GetById, RemoveById, ShowAll, Clear");
+            while (exit == false)
+            {
+                Console.WriteLine("Enter command: ");
+                string command = Console.ReadLine();
+                switch (command)
+                {
+                    case "Add":
+                        Console.WriteLine("Enter ts: ");
+                        collectionUsingDictionary.Add(Console.ReadLine());
+                        break;
+                    case "AddMany":
+                        Console.WriteLine("Enter number of objects: ");
+                        int num = Convert.ToInt32(Console.ReadLine());
+                        object[] tester = new object[num];
+                        for (int i = 0; i < num; i++)
+                        {
+                            Console.WriteLine("Enter object number {0}", i);
+                            tester[i] = Console.ReadLine();
+                        }
+                        collectionUsingDictionary.AddMany(tester);
+                        break;
+                    case "GetAll":
+                        object[] tester1 = collectionUsingDictionary.GetAll();
+                        if (tester1 != null)
+                        {
+                            for (int i = 0; i < tester1.Length; i++)
+                            {
+                                Console.WriteLine(tester1[i]);
+                            }
+                        }
+                        break;
+                    case "GetById":
+                        Console.WriteLine("Enter object id: ");
+                        Console.WriteLine("OBJECT: {0}", collectionUsingDictionary.GetByID(Convert.ToInt32(Console.ReadLine())).ToString());
+                        break;
+                    case "RemoveById":
+                        Console.WriteLine("Enter object id: ");
+                        collectionUsingDictionary.RemoveByID(Convert.ToInt32(Console.ReadLine()));
+                        break;
+                    case "ShowAll":
+                        collectionUsingDictionary.ShowAll();
+                        break;
+                    case "Clear":
+                        collectionUsingDictionary.Clear();
+                        break;
+                    case "Exit":
+                        exit = true;
+                        break;
+
+                }
+            }
+
             #endregion
         }
 

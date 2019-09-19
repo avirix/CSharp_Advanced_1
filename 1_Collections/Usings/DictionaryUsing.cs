@@ -9,46 +9,34 @@ namespace ITEA_Collections.Usings
     public class DictionaryUsing : IBaseCollectionUsing
     {
         public Dictionary<int, string> Dictionary { get; set; }
-        private Random rnd;
-        private int FirstKey { get; set; }
-
-        public DictionaryUsing()
+        private int FirstId { get; set; }
+        public DictionaryUsing(int id)
         {
             Dictionary = new Dictionary<int, string>();
-            rnd = new Random(DateTime.Now.Second);
-
+            FirstId = id;
         }
 
         public void Add(object ts)
         {
-            if(FirstKey == 0)
+            if (Dictionary.Count == 0)
             {
-                FirstKey = rnd.Next();
-                Dictionary.Add(FirstKey, ts.ToString());
+                Dictionary.Add(FirstId, ts.ToString());
             }
             else
             {
-                if(Dictionary.Count != 0)
-                {
-                    int key = Dictionary.Keys.ToArray().Max();
-                    Dictionary.Add(++key, ts.ToString());
-                }
-                else
-                {
-                    FirstKey = rnd.Next();
-                    Dictionary.Add(FirstKey, ts.ToString());
-                }
+                int key = Dictionary.Keys.ToArray().Max();
+                Dictionary.Add(++key, ts.ToString());
             }
         }
 
         public void AddMany(object[] ts)
         {
-            if (FirstKey == 0)
+            if (Dictionary.Count == 0)
             {
-                Dictionary.Add(FirstKey, ts[0].ToString());
+                Dictionary.Add(FirstId, ts[0].ToString());
                 for (int i = 1; i < ts.Length; i++)
                 {
-                    Dictionary.Add(++FirstKey, ts[i].ToString());
+                    Dictionary.Add(++FirstId, ts[i].ToString());
                 }           
             }
             else
@@ -59,7 +47,6 @@ namespace ITEA_Collections.Usings
                     Dictionary.Add(++key, ts[i].ToString());
                 }
             }
-            //throw new NotImplementedException();
         }
         public void Clear()
         {
