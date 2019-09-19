@@ -249,7 +249,7 @@ namespace ITEA_Collections
             ToConsole(vs.ToString());
             vs.RemoveLast();
             vs.RemoveLast();
-            ToConsole(vs.ToString());
+            ToConsole(vs[0]);
             #endregion
         }
     }
