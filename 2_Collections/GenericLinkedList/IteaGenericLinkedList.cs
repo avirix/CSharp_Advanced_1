@@ -4,15 +4,14 @@ namespace ITEA_Collections.GenericLinkedList
 {
     internal class IteaGenericLinkedList<T>
     {
-        int count = 0;
-        public int Count { get => count; }
+        public int Count { get; private set; } = 0;
         IteaLinkedListElement<T> Head { get; set; }
 
         protected IteaGenericLinkedList() { }
 
         public IteaGenericLinkedList(T element)
         {
-            count = 1;
+            Count = 1;
             Head = new IteaLinkedListElement<T>(element);
         }
 
@@ -61,7 +60,7 @@ namespace ITEA_Collections.GenericLinkedList
         public void Add(T el)
         {
             IteaLinkedListElement<T> newElement = new IteaLinkedListElement<T>(el);
-            count++;
+            Count++;
             if (Head == null)
                 Head = newElement;
             else
@@ -81,7 +80,7 @@ namespace ITEA_Collections.GenericLinkedList
             if (index < 1 && index > Count)
                 throw new IndexOutOfRangeException();
 
-            count++;
+            Count++;
             IteaLinkedListElement<T> itemToReplace = IteaGoogle(index);
             IteaLinkedListElement<T> newItem = new IteaLinkedListElement<T>(element);
             IteaLinkedListElement<T> previousItem = itemToReplace.Previous;
@@ -96,7 +95,7 @@ namespace ITEA_Collections.GenericLinkedList
         public T RemoveLast()
         {
             IteaLinkedListElement<T> last = GetLast();
-            count--;
+            Count--;
             if (last != Head)
             {
                 last.Previous.Next = null;
