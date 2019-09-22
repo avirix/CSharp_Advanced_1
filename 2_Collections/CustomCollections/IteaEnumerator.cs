@@ -9,6 +9,7 @@ namespace ITEA_Collections.CustomCollections
     {
         private object[] _collection;
         private int _currentIndex = -1;
+
         public object Current
         {
             get
@@ -24,14 +25,16 @@ namespace ITEA_Collections.CustomCollections
                 }
             }
         }
+
         #region constructors
-        private IteaEnumerator() { }
+        protected IteaEnumerator() { }
 
         public IteaEnumerator(object[] collection)
         {
             _collection = collection;
         }
         #endregion
+
         public bool MoveNext()
         {
             _currentIndex++;
