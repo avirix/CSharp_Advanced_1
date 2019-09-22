@@ -11,6 +11,7 @@ namespace StrategyGame
     {
         static void Main(string[] args)
         {
+
             List<Gunner> gunners = new List<Gunner>();
             for (int i = 0; i < 15; i++)
                 gunners.Add(new Gunner());
