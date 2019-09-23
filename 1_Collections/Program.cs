@@ -32,8 +32,8 @@ namespace ITEA_Collections
             IBaseCollectionUsing DictUsing = new DictionaryUsing();
             BaseUsingTest.Execute(ref DictUsing);
             IBaseCollectionUsing DictUsing2 = new DictionaryUsing();
-            BaseUsingTest.Execute(ref DictUsing2, new object[] { 12, new { Petya = 4 }, "Hello", 67, 42, 15, 3.1415, "ABC", "wood", "size" });
-
+            BaseUsingTest.Execute(ref DictUsing2, new object[] { 12, new { Petya = 4 }, "Hello", 67,42,15,3.1415,"ABC","wood","size" });
+ 
             #endregion
         }
 
