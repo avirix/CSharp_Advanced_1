@@ -2,8 +2,10 @@
 
 namespace ITEA_Collections.Common
 {
-    public static class Extensions
+    public class Extensions
     {
+        public int I { get; set; }
+
         public static void ToConsole(object obj, ConsoleColor color = ConsoleColor.White)
         {
             Console.ForegroundColor = color;

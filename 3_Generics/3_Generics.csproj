@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>StrategyGame</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Buildings\Intrefaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\1_Collections\1_Collections.csproj" />
+  </ItemGroup>
+
+</Project>
