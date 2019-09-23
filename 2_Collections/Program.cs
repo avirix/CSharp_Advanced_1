@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-
+using System.Linq;
 using ITEA_Collections.CustomCollections;
-using ITEA_Collections.GenericLinkedList;
+
 using static ITEA_Collections.Common.Extensions;
 
 namespace ITEA_Collections
@@ -16,7 +16,9 @@ namespace ITEA_Collections
             #region Lesson
             string[] numbers = new string[] { "1", "2", "3" };
             UseCollection(numbers);
+            UseEnumerator(numbers);
             UseList(numbers);
+            UseObservable();
             UseWeirdYield();
             
             UseEnumerator(numbers);

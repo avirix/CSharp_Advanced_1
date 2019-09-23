@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using ITEA_Collections.Common;
 
 using static ITEA_Collections.Common.Extensions;
@@ -17,11 +16,12 @@ namespace ITEA_Collections.CustomCollections
         public IteaCollection()
         {
             collection = new object[128];
+            enumerator = new IteaEnumerator(collection);
         }
 
         public IEnumerator GetEnumerator()
         {
-            return new IteaEnumerator(collection);
+            return enumerator;
         }
 
         #region IBaseCollectionUsing
@@ -82,7 +82,7 @@ namespace ITEA_Collections.CustomCollections
         {
             foreach (var item in collection)
             {
-                if (item is string i)//if(item.GetType().Name == "String") string i = (string)item;                        
+                if(item is string i)
                     yield return i;
             }
         }

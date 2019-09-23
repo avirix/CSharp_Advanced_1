@@ -2,6 +2,7 @@
 using System.Linq;
 
 using ITEA_Collections.Common;
+using ITEA_Collections.Usings;
 
 using static ITEA_Collections.Common.Extensions;
 
@@ -18,7 +19,7 @@ namespace ITEA_Collections.Testing
                 collectionUsing.AddMany(p);
                 if (!collectionUsing.GetAll().Any())
                     throw new Exception("Test failed, Add/AddMany");
-                collectionUsing.RemoveByID(15);
+                collectionUsing.RemoveByID(10);
                 var i1 = collectionUsing.GetByID(1);
                 collectionUsing.RemoveByID(1);
                 if (i1 == collectionUsing.GetByID(1))
@@ -34,5 +35,29 @@ namespace ITEA_Collections.Testing
                 ToConsole(ex.Message, ConsoleColor.Red);
             }
         }
+        /*public static void Execute(ref GenericListUsing GlistUsing, object[] p = null) {
+            p = p ?? new object[] { 3, new { name = 5 } };
+            try
+            {
+                GlistUsing.Add("1");
+                GlistUsing.AddMany(p);
+                if(!GlistUsing.GetAll().Any())
+                    throw new Exception("Test failed, Add/AddMany");
+                GlistUsing.RemoveByID(15);
+                var i1 = GlistUsing.GetByID(1);
+                GlistUsing.RemoveByID(1);
+                if (i1 == GlistUsing.GetByID(1))
+                    throw new Exception("Test failed, RemoveByID");
+                GlistUsing.GetAll().ToList().ForEach(x => ToConsole(x, ConsoleColor.Cyan));
+                GlistUsing.Clear();
+                if (GlistUsing.GetAll().Any())
+                    throw new Exception("Test failed, Clear");
+                ToConsole($"{GlistUsing.GetType().Name}: test successfully completed!", ConsoleColor.Green);
+            }
+            catch (Exception ex)
+            {
+                ToConsole(ex.Message, ConsoleColor.Red);
+            }
+        } */
     }
 }
