@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 
 using ITEA_Collections.Common;
+using static ITEA_Collections.Common.Extensions;
+using System.Linq;
 
 namespace ITEA_Collections.Usings
 {
@@ -14,39 +16,71 @@ namespace ITEA_Collections.Usings
             Dictionary = new Dictionary<int, string>();
         }
 
-        public void Add(object ts)
+        public void Add(object ts) {
+            Add(ts.ToString());
+        }
+        public void Add(string ts)
         {
-            throw new NotImplementedException();
+            int id = GetLastID() +1;
+            try { Dictionary.Add(id, ts); }
+            catch (Exception ex)
+            {
+                ToConsole(ex.GetType().Name + ex.Message);
+                ToConsole($"Cannot add element {ts} with {id}", ConsoleColor.Red);
+            }
         }
 
         public void AddMany(object[] ts)
         {
-            throw new NotImplementedException();
+            foreach (object element in ts) {
+                Add(element.ToString());
+            }
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            Dictionary.Clear();
         }
 
         public object[] GetAll()
         {
-            throw new NotImplementedException();
+            return Dictionary.Cast<object>().ToArray();
         }
 
         public object GetByID(int index)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Dictionary[index];
+            }
+            catch 
+            {
+               return null;
+            }
         }
 
         public void RemoveByID(int index)
         {
-            throw new NotImplementedException();
+            if (!Dictionary.Remove(index)) { ToConsole($"Cannot remove element with id: {index}", ConsoleColor.Red); }
+            else { ToConsole($"Successfully removed #{index}", ConsoleColor.DarkYellow); }
+   
+        }
+
+        public int GetLastID() {
+            int id =-1;
+            if (Dictionary.Count > 0) {
+                id = Dictionary.Keys.Max();
+            }
+            return id;
         }
 
         public void ShowAll()
         {
-            throw new NotImplementedException();
+            foreach (KeyValuePair<int, string> element in Dictionary)
+            {
+                Console.WriteLine("Key:- {0} and Value:- {1} ",
+                                   element.Key, element.Value);
+            }
         }
     }
 }

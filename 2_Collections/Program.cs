@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-
+using System.Linq;
 using ITEA_Collections.CustomCollections;
-using ITEA_Collections.GenericLinkedList;
+
 using static ITEA_Collections.Common.Extensions;
 
 namespace ITEA_Collections
@@ -13,47 +13,12 @@ namespace ITEA_Collections
     {
         static void Main(string[] args)
         {
-            #region Lesson
-            /*
             string[] numbers = new string[] { "1", "2", "3" };
             UseCollection(numbers);
+            UseEnumerator(numbers);
             UseList(numbers);
+            UseObservable();
             UseWeirdYield();
-            
-            UseEnumerator(numbers);*/
-            //UseObservable();
-            /*
-            UseWeirdYield();
-            
-            Dictionary<int, string> dict = new Dictionary<int, string>();
-            for (int i = 1; i < 11; i++)
-            {
-                dict.Add(i, i.ToString());
-            }
-            Console.WriteLine();
-            foreach (var item in dict)
-            {
-                ToConsoleLine($"{item.Value}; ");
-            }
-            Console.WriteLine();
-            foreach (var item in dict)
-            {
-                if(item.Key % 2 == 0)
-                    ToConsoleLine($"{item.Value}; ");
-            }
-            Console.WriteLine();
-            foreach (var item in dict)
-            {
-                if (item.Key % 2 == 1)
-                    ToConsoleLine($"{item.Value}; ");
-            }
-            */
-            #endregion
-            IteaGenericLinkedList<string> iteaGeneric = new IteaGenericLinkedList<string>("First");
-            Console.WriteLine(iteaGeneric[0]);
-            iteaGeneric.Add("Second");
-            iteaGeneric.InsertByIndex(1, "Third");
-            ToConsole(iteaGeneric.ToString());
         }
 
         static void UseCollection(object[] objects)
@@ -66,11 +31,11 @@ namespace ITEA_Collections
                 ToConsoleLine($"{item}; ", ConsoleColor.Cyan);
             }
             Console.WriteLine();
+            iteaCollection.GetEnumerator().Reset();
             ToConsoleLine("IteaCollection/while: ", ConsoleColor.Green);
-            var enumerator = iteaCollection.GetEnumerator();
-            while (enumerator.MoveNext())
+            while (iteaCollection.GetEnumerator().MoveNext())
             {
-                ToConsoleLine($"{enumerator.Current}; ", ConsoleColor.Cyan);
+                ToConsoleLine($"{iteaCollection.GetEnumerator().Current}; ", ConsoleColor.Cyan);
             }
             Console.WriteLine();
         }
@@ -158,38 +123,26 @@ namespace ITEA_Collections
         private class Number
         {
             private static int n = 0;
-            public int N { get => ++n; } // такое делать НЕЛЬЗЯ!!!!111 (в настоящих проектах)
+            public int N { get => ++n; }
         }
 
         static void UseWeirdYield()
         {
             Number i = new Number();
-            IEnumerable<int> myEn = CreateIntEnumerable(i);//.ToList();
+            var myEn = CreateIntEnumerable(i).ToList();
             foreach (var item in myEn)
-                ToConsole($"{item}; ", ConsoleColor.Cyan);
+                ToConsoleLine($"{item}; ", ConsoleColor.Cyan);
             Console.WriteLine();
             foreach (var item in myEn)
-                ToConsole($"{item}; ", ConsoleColor.Cyan);
+                ToConsoleLine($"{item}; ", ConsoleColor.Cyan);
         }
 
         private static IEnumerable<int> CreateIntEnumerable(Number k)
         {
             for (int i = 0; i < 10; i++)
             {
-                //ToConsole($"Console: {k.N}", ConsoleColor.White);
                 yield return k.N;
             }
-        }
-
-        private static List<int> CreateIntEnumerableList(Number k)
-        {
-            List<int> list = new List<int>();
-            for (int i = 0; i < 10; i++)
-            {
-                //ToConsole($"Console: {k.N}", ConsoleColor.White);
-                list.Add(k.N);
-            }
-            return list;
         }
     }
 }

@@ -16,15 +16,24 @@ namespace ITEA_Collections
     {
         static void Main(string[] args)
         {
-            var str = "Hello world";
-            Console.WriteLine(string.Concat(str.Reverse()));
-            str.ToList().ForEach(x => Console.WriteLine(x));
+            //var str = "Hello world";
+            //Console.WriteLine(string.Concat(str.Reverse()));
+            //str.ToList().ForEach(x => Console.WriteLine(x));
             //BaseExamples();
             //Lesson();
-            Additional();
+            //Additional();
             #region Homework
-            IBaseCollectionUsing collectionUsing = new ArrayListUsing();
-            BaseUsingTest.Execute(ref collectionUsing);
+            //IBaseCollectionUsing collectionUsing = new ArrayListUsing();
+            //BaseUsingTest.Execute(ref collectionUsing);
+            ToConsole("List check", ConsoleColor.Blue);
+            IBaseCollectionUsing GListUsing = new GenericListUsing();
+            BaseUsingTest.Execute(ref GListUsing);
+            ToConsole("Dictionary check", ConsoleColor.Blue);
+            IBaseCollectionUsing DictUsing = new DictionaryUsing();
+            BaseUsingTest.Execute(ref DictUsing);
+            IBaseCollectionUsing DictUsing2 = new DictionaryUsing();
+            BaseUsingTest.Execute(ref DictUsing2, new object[] { 12, new { Petya = 4 }, "Hello", 67, 42, 15, 3.1415, "ABC", "wood", "size" });
+
             #endregion
         }
 
