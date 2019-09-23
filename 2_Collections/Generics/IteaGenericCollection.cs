@@ -38,7 +38,8 @@ namespace ITEA_Collections.Generics
         {
             if (count == 0)
             {
-                return collection;
+                T[] ts = new T[0];
+                return ts;
             }
             else
             {
