@@ -1,4 +1,6 @@
-﻿namespace ITEA_Collections.Generics
+﻿using System.Collections.Generic;
+
+namespace ITEA_Collections.Generics
 {
     interface IBaseGenericCollectionUsing<T>
     {
@@ -9,5 +11,7 @@
         T[] GetAll();
         void Clear();
         void ShowAll();
+        IEnumerator<T> GetEnumerator();
+        IEnumerable<T> Test();
     }
 }

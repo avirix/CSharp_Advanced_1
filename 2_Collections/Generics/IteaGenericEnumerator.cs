@@ -1,29 +1,66 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using static ITEA_Collections.Common.Extensions;
 namespace ITEA_Collections.Generics
 {
     public class IteaGenericEnumerator<T> : IEnumerator<T>
     {
         #region IEnumerator
-        public T Current => throw new NotImplementedException();
+        private T[] _collection;
+        private int _currentIndex = -1;
+        private IteaGenericEnumerator() { }
 
-        object IEnumerator.Current => throw new NotImplementedException();
-
+        public IteaGenericEnumerator(T[] collection)
+        {
+            _collection = collection;
+        }
+        public T Current
+        {
+            get
+            {
+                try
+                {
+                    return _collection[_currentIndex];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    ToConsole("IteaEnumerator: IndexOutOfRangeException", ConsoleColor.Red);
+                    return default;
+                }
+            }
+        }
+        object IEnumerator.Current
+        {
+            get
+            {
+                try
+                {
+                    return _collection[_currentIndex];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    ToConsole("IteaEnumerator: IndexOutOfRangeException", ConsoleColor.Red);
+                    return null;
+                }
+            }
+        }
+        public IEnumerator GetEnumerator()
+        {
+            return this;
+        }
         public void Dispose()
         {
-            throw new NotImplementedException();
-        }
 
+        }
         public bool MoveNext()
         {
-            throw new NotImplementedException();
+            _currentIndex++;
+            return _currentIndex < _collection.Length && _collection[_currentIndex] != null;
         }
-
         public void Reset()
         {
-            throw new NotImplementedException();
+            _currentIndex = -1;
         }
         #endregion
     }
