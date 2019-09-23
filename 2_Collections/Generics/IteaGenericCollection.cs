@@ -1,59 +1,94 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using static ITEA_Collections.Common.Extensions;
 
 namespace ITEA_Collections.Generics
 {
     public class IteaGenericCollection<T> : IEnumerable<T>, IBaseGenericCollectionUsing<T>
     {
         private T[] collection;
+        private IteaGenericEnumerator<T> enumerator;
+        private int count = 0;
 
         #region IBaseGenericCollectionUsing
+        public IteaGenericCollection()
+        {
+            collection = new T[128];
+            enumerator = new IteaGenericEnumerator<T>(collection);
+            count = 0;
+        }
+
         public void Add(T ts)
         {
-            throw new NotImplementedException();
+            collection[count] = ts;
+            count++;
         }
 
         public void AddMany(T[] ts)
         {
-            throw new NotImplementedException();
+            foreach (T element in ts) {
+                this.Add(element);
+            }
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            collection = new T[128];
+            count = 0;
         }
 
         public T[] GetAll()
         {
-            throw new NotImplementedException();
+           return collection;
         }
 
         public T GetByID(int index)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return collection[index] ;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                ToConsole("IteaGenericCollection/GetByID: IndexOutOfRangeException", ConsoleColor.Red);
+                return default(T);
+            }
         }
 
         public void RemoveByID(int index)
         {
-            throw new NotImplementedException();
+            try
+            {
+                collection.ToList().RemoveAt(index);
+                count--;
+            }
+            catch
+            {
+                ToConsole("IteaGenericCollection / GetByID: Cannot remove item", ConsoleColor.Red);
+            }
         }
 
         public void ShowAll()
         {
-            throw new NotImplementedException();
+            int i = 0;
+            while (i < count) {
+                ToConsole(collection[i].ToString(), ConsoleColor.White);
+                i++;
+            };
         }
         #endregion
 
         #region IEnumerable
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return enumerator;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return enumerator;
         }
         #endregion
     }
