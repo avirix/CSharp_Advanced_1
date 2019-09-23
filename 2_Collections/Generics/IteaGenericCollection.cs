@@ -29,7 +29,7 @@ namespace ITEA_Collections.Generics
         public void AddMany(T[] ts)
         {
             foreach (T element in ts) {
-                this.Add(element);
+                Add(element);
             }
         }
 
@@ -41,7 +41,8 @@ namespace ITEA_Collections.Generics
 
         public T[] GetAll()
         {
-            return collection;
+            if (count != 0) return collection;
+            else return new T[0];
         }
 
         public T GetByID(int index)
@@ -61,7 +62,12 @@ namespace ITEA_Collections.Generics
         {
             try
             {
-                collection.ToList().RemoveAt(index);
+                int i = 0;
+                while (i < count - index) {
+                    collection[index + i] = collection[index + i + 1];
+                    i++;
+                }
+                collection[count] = default(T);
                 count--;
             }
             catch
