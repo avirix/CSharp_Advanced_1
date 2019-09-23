@@ -41,14 +41,14 @@ namespace ITEA_Collections.Generics
 
         public T[] GetAll()
         {
-           return collection;
+            return collection;
         }
 
         public T GetByID(int index)
         {
             try
             {
-                return collection[index] ;
+                return collection[index];
             }
             catch (IndexOutOfRangeException)
             {
@@ -68,6 +68,12 @@ namespace ITEA_Collections.Generics
             {
                 ToConsole("IteaGenericCollection / GetByID: Cannot remove item", ConsoleColor.Red);
             }
+        }
+
+        public IEnumerable<T> NPair() {
+            for (int i = 0; i < count; i++) {
+                if (i % 2 == 1) yield return collection[i];
+             } 
         }
 
         public void ShowAll()
