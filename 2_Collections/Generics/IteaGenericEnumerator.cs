@@ -1,29 +1,50 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using static ITEA_Collections.Common.Extensions;
 
 namespace ITEA_Collections.Generics
 {
     public class IteaGenericEnumerator<T> : IEnumerator<T>
     {
         #region IEnumerator
-        public T Current => throw new NotImplementedException();
+        private T[] _collection;
+        private int _currentIndex = -1;
 
-        object IEnumerator.Current => throw new NotImplementedException();
+        public T Current {
+            get
+            {
+                try
+                {
+                    return _collection[_currentIndex];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    ToConsole("IteaEnumerator: IndexOutOfRangeException", ConsoleColor.Red);
+                    return default(T);
+                }
+            }
+        }
+        public IteaGenericEnumerator(T[] collection) {
+            _collection = collection;
+        }
+
+        object IEnumerator.Current => Current;
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            this.Dispose();
         }
 
         public bool MoveNext()
         {
-            throw new NotImplementedException();
+            _currentIndex++;
+            return _currentIndex < _collection.Length && _collection[_currentIndex] != null;
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            _currentIndex =-1;
         }
         #endregion
     }
