@@ -5,6 +5,8 @@ using System.Collections.Specialized;
 using System.Linq;
 using ITEA_Collections.CustomCollections;
 using ITEA_Collections.GenericLinkedList;
+using ITEA_Collections.Generics;
+using ITEA_Collections.Generics.Testing;
 using static ITEA_Collections.Common.Extensions;
 
 namespace ITEA_Collections
@@ -53,6 +55,20 @@ namespace ITEA_Collections
             iteaGeneric.Add("Second");
             iteaGeneric.InsertByIndex(1, "Third");
             ToConsole(iteaGeneric.ToString());
+            #region HomeWork
+            string[] Books = new string[] { " Ulysses", "Don Quixote", "The Great Gatsby", " Moby Dick", "One Hundred Years of Solitude", "War and Peace", "Hamlet", "Lolita", "The Odyssey", "The Brothers Karamazov", "The Adventures of Huckleberry Finn", "Madame Bovary" };
+            IBaseGenericCollectionUsing<string> GenCollection = new IteaGenericCollection<string>();
+            GenCollection.Add("In Search of Lost Time");
+            BaseGenericUsingTest.Execute<string>(ref GenCollection, Books);
+            IteaGenericCollection<string> OCollection = new IteaGenericCollection<string>();
+            OCollection.AddMany(Books);
+            foreach (string book in OCollection.NPair()) {
+                ToConsole(book, ConsoleColor.Green);
+            }
+            #endregion
+
+
+
         }
 
         static void UseCollection(object[] objects)
@@ -178,5 +194,9 @@ namespace ITEA_Collections
                 yield return k.N;
             }
         }
+
+
+
+
     }
 }
