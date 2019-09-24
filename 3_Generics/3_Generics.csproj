@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Buildings\Intrefaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\1_Collections\1_Collections.csproj" />
   </ItemGroup>
 

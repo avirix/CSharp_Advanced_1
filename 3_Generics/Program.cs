@@ -27,6 +27,11 @@ namespace StrategyGame
             for (int i = 0; i < 18; i++)
                 bowmen.Add((Bowman)barrack.CreateUnit());
 
+            barrack = new KnightBarrack("Knight");
+            List<Knight> knights = new List<Knight>();
+            for (int i = 0; i < 18; i++)
+                knights.Add((Knight)barrack.CreateUnit());
+
             var battle1 = new Battle<Gunner, Pikeman>(gunners, pikemen);
             ToConsole(battle1.CountResults(), ConsoleColor.Green);
 
@@ -35,6 +40,9 @@ namespace StrategyGame
 
             var battle3 = new RangeBattle(gunners, bowmen);
             ToConsole(battle3.CountResults(), ConsoleColor.Green);
+
+            var battle4 = new CavalryAttack<Gunner>(knights, gunners);
+            ToConsole(battle4.CountResults(), ConsoleColor.Green);
         }
     }
 }

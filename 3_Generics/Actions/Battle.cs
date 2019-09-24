@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using StrategyGame.Warriors.Abstractions;
-
 using static ITEA_Collections.Common.Extensions;
 
 namespace StrategyGame.Actions
