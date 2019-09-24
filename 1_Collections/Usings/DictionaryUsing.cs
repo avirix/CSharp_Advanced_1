@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using static ITEA_Collections.Common.Extensions;
 using ITEA_Collections.Common;
 
 namespace ITEA_Collections.Usings
@@ -16,37 +16,105 @@ namespace ITEA_Collections.Usings
 
         public void Add(object ts)
         {
-            throw new NotImplementedException();
+            int MaxKey = 0;
+            foreach (KeyValuePair<int, string> keyValue in Dictionary)
+            {
+                if (keyValue.Key > MaxKey)
+                {
+                    MaxKey = keyValue.Key;
+                }
+            }
+            MaxKey = ++MaxKey;
+            Dictionary.Add(MaxKey, ts.ToString());
         }
 
         public void AddMany(object[] ts)
         {
-            throw new NotImplementedException();
+            int MaxKey = 0;
+            foreach (KeyValuePair<int, string> keyValue in Dictionary)
+            {
+                if (keyValue.Key > MaxKey)
+                {
+                    MaxKey = keyValue.Key;
+                }
+            }
+            if (ts is null)
+                ToConsole($"Array is null!", ConsoleColor.Red);
+            else
+            {
+                for (int i = 0; i < ts.Length; i++)
+                {
+                    MaxKey = ++MaxKey;
+                    Dictionary.Add(MaxKey, ts[i].ToString());
+                }
+            }
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            Dictionary.Clear();
         }
 
         public object[] GetAll()
         {
-            throw new NotImplementedException();
+            List<object> list = new List<object>();
+            foreach (KeyValuePair<int, string> keyValue in Dictionary)
+            {
+                list.Add(keyValue.Key);
+                list.Add(keyValue.Value);
+            }
+            object[] listobject = new object[list.Count];
+            for (int i = 0; i < listobject.Length; i++)
+            {
+                listobject[i] = list[i];
+            }
+            return listobject;
         }
 
-        public object GetByID(int index)
+
+        public object GetByID(int key)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string a = "";
+                foreach (KeyValuePair<int, string> keyValue in Dictionary)
+                {
+                    if (keyValue.Key == key)
+                    {
+                        a = keyValue.Value;
+                    }
+                }
+                return a;
+            }
+            catch (Exception ex)
+            {
+                ToConsole(ex.GetType().Name + ex.Message);
+                ToConsole($"No element with key: {key}", ConsoleColor.Red);
+                return null;
+            }
+
         }
 
-        public void RemoveByID(int index)
+        public void RemoveByID(int key)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Dictionary.Remove(key);
+                ToConsole($"Successfully removed #{key}", ConsoleColor.DarkYellow);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                ToConsole($"No element with index: {key}", ConsoleColor.Red);
+            }
+
         }
 
         public void ShowAll()
         {
-            throw new NotImplementedException();
+            foreach (KeyValuePair<int, string> keyValue in Dictionary)
+            {
+                ToConsole($"Key: { keyValue.Key}; Value: { keyValue.Value}", ConsoleColor.DarkRed);
+            }
         }
     }
 }

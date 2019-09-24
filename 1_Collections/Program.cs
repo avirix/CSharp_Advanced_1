@@ -16,15 +16,23 @@ namespace ITEA_Collections
     {
         static void Main(string[] args)
         {
+            /*
             var str = "Hello world";
             Console.WriteLine(string.Concat(str.Reverse()));
             str.ToList().ForEach(x => Console.WriteLine(x));
             //BaseExamples();
             //Lesson();
             Additional();
+            */
             #region Homework
             IBaseCollectionUsing collectionUsing = new ArrayListUsing();
             BaseUsingTest.Execute(ref collectionUsing);
+
+            IBaseCollectionUsing collectionUsingList = new GenericListUsing();
+            BaseUsingTest.Execute(ref collectionUsingList);
+
+            IBaseCollectionUsing collectionUsingDictionary = new DictionaryUsing();
+            BaseUsingTest.Execute(ref collectionUsingDictionary);
             #endregion
         }
 
