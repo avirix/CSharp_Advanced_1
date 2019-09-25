@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using StrategyGame.Actions;
-using StrategyGame.Warriors.Models.Infantry;
+
 using static ITEA_Collections.Common.Extensions;
 
 
@@ -11,7 +10,7 @@ namespace StrategyGame
     {
         static void Main(string[] args)
         {
-
+            /*
             List<Gunner> gunners = new List<Gunner>();
             for (int i = 0; i < 15; i++)
                 gunners.Add(new Gunner());
@@ -32,6 +31,47 @@ namespace StrategyGame
 
             var battle3 = new RangeBattle(gunners, bowmen);
             ToConsole(battle3.CountResults(), ConsoleColor.Green);
+            */
+
+            Guid a = new Guid();
+            Guid b = Guid.NewGuid();
+
+            ToConsole($"{a}, {b}");
+
+        }
+    }
+
+    interface IModel
+    {
+        Guid Id { get; set; }
+    }
+
+    public class Company : IModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public List<Person> employes { get; set; }
+
+        public Company(string name)
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+        }
+    }
+
+    public class Person : IModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public Guid CompanyId { get; set; }
+
+        public Person(string name, int age, Guid companyId)
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+            Age = age;
+            CompanyId = companyId;
         }
     }
 }
