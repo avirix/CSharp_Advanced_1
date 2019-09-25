@@ -7,12 +7,16 @@ using static ITEA_Collections.Common.Extensions;
 namespace IteaDelegates.IteaMessanger
 {
     public delegate void OnMessage(Message message);
+    public delegate void OnSend(object sender, OnSendEventArgs e);
 
     public class Account
     {
         public string Username { get; private set; }
         public List<Message> Messages { get; set; }
-        public OnMessage NewMessage { get; set; } = (message) =>
+
+        public event OnSend OnSend;
+
+        public OnMessage NewMessage { get; set; } = delegate (Message message)  // (message)  =>
         {
             if (message.Send)
                 ToConsole($"{message.To.Username}, new message from {message.From.Username}:\n  {message.Preview}", ConsoleColor.Green);
@@ -37,6 +41,8 @@ namespace IteaDelegates.IteaMessanger
             message.Send = true;
             message.To.Messages.Add(message);
             message.To.NewMessage(message);
+            if(OnSend != null)
+                OnSend(this, new OnSendEventArgs(message.ReadMessage(this), message.From.Username, message.To.Username));
         }
 
         public void OnNewMessage(Message message)
