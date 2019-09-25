@@ -13,13 +13,6 @@ namespace StrategyGame.Buildings
             Name = n;
         }
         abstract public CombatUnit CreateUnit();
-        //public readonly Dictionary<Type, int> warriorsCost = new Dictionary<Type, int>
-        //{
-        //     {typeof(Pikeman), 11},
-        //     {typeof(Bowman), 8},
-        //     {typeof(Gunner), 15}
-        //};
 
-        //protected Barracks() { }
     }
 }

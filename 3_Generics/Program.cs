@@ -12,25 +12,23 @@ namespace StrategyGame
     {
         static void Main(string[] args)
         {
+            Resolver resolver = new Resolver();
+            
             List<Gunner> gunners = new List<Gunner>();
-            Barrack barrack = new GunnerBarrack("Gunner");
             for (int i = 0; i < 15; i++)
-                gunners.Add((Gunner)barrack.CreateUnit());
+                gunners.Add((Gunner)resolver.Get("Gunner"));
 
-            barrack = new PickmanBarrack("PikeMan");
             List<Pikeman> pikemen = new List<Pikeman>();
             for (int i = 0; i < 16; i++)
-                pikemen.Add((Pikeman)barrack.CreateUnit());
+                pikemen.Add((Pikeman)resolver.Get("Pikeman"));
 
-            barrack = new BowmanBarrack("BowMan");
             List<Bowman> bowmen = new List<Bowman>();
             for (int i = 0; i < 18; i++)
-                bowmen.Add((Bowman)barrack.CreateUnit());
+                bowmen.Add((Bowman)resolver.Get("Bowman"));
 
-            barrack = new KnightBarrack("Knight");
             List<Knight> knights = new List<Knight>();
             for (int i = 0; i < 18; i++)
-                knights.Add((Knight)barrack.CreateUnit());
+                knights.Add((Knight)resolver.Get("Knight"));
 
             var battle1 = new Battle<Gunner, Pikeman>(gunners, pikemen);
             ToConsole(battle1.CountResults(), ConsoleColor.Green);

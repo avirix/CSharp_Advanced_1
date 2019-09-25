@@ -6,9 +6,9 @@ using System.Text;
 
 namespace StrategyGame.Buildings
 {
-    class PickmanBarrack : Barrack
+    class PikemanBarrack : Barrack
     {
-        public PickmanBarrack(string n) : base(n)
+        public PikemanBarrack(string n) : base(n)
         {
 
         }
