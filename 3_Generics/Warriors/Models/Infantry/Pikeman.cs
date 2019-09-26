@@ -1,4 +1,5 @@
-﻿using StrategyGame.Warriors.Abstractions;
+﻿using StrategyGame.Base.Interfaces;
+using StrategyGame.Warriors.Abstractions;
 
 namespace StrategyGame.Warriors.Models.Infantry
 {
@@ -6,6 +7,11 @@ namespace StrategyGame.Warriors.Models.Infantry
     {
         public Pikeman() : base(14, 8, CombatUnitType.Melee)
         {
+        }
+
+        public override void MeleeAttack(IUnit unit)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

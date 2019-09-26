@@ -1,6 +1,7 @@
 ﻿namespace StrategyGame.Base.Interfaces
 {
-    interface IUnit
+    public interface IUnit
     {
+        int Health { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace ITEA_Collections.Generics.Testing
                 if (!collectionUsing.GetAll().Any())
                     throw new Exception("Test failed, Add/AddMany");
                 collectionUsing.RemoveByID(15);
-                var i1 = collectionUsing.GetByID(1);
+                T i1 = collectionUsing.GetByID(1);
                 collectionUsing.RemoveByID(1);
                 if (i1.Equals(collectionUsing.GetByID(1)))
                     throw new Exception("Test failed, RemoveByID");
