@@ -1,4 +1,7 @@
-﻿using System;
+﻿using StrategyGame.Actions;
+using StrategyGame.Warriors.Models.Cavalry;
+using StrategyGame.Warriors.Models.Infantry;
+using System;
 using System.Collections.Generic;
 
 using static ITEA_Collections.Common.Extensions;
@@ -33,10 +36,23 @@ namespace StrategyGame
             ToConsole(battle3.CountResults(), ConsoleColor.Green);
             */
 
-            Guid a = new Guid();
-            Guid b = Guid.NewGuid();
+            List<Knight> knights = new List<Knight>();
+            for (int i = 0; i < 15; i++) knights.Add(new Knight());
+            
+            List<Pikeman> pikemans = new List<Pikeman>();
+            for (int i = 0; i < 10; i++) pikemans.Add(new Pikeman());
 
-            ToConsole($"{a}, {b}");
+            List<Gunner> gunners = new List<Gunner>();
+            for (int i = 0; i < 30; i++) gunners.Add(new Gunner());
+
+            List<Bowman> bowmans = new List<Bowman>();
+            for (int i = 0; i < 50; i++) bowmans.Add(new Bowman());
+
+            // va b1 = new CavalryAttack<Pikeman>(knights,pikemans) # Cannot implement cause Pikemans not range unit
+            var b2 = new CavalryAttack<Gunner>(knights, gunners);
+            ToConsole(b2.CountResults(), ConsoleColor.Blue);
+            var b3 = new CavalryAttack<Bowman>(knights, bowmans);
+            ToConsole(b3.CountResults(), ConsoleColor.Blue);
 
         }
     }
