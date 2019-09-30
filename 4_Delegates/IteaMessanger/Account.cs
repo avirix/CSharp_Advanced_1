@@ -28,14 +28,40 @@ namespace IteaDelegates.IteaMessanger
             Messages = new List<Message>();
             //NewMessage += OnNewMessage;
         }
-
+        public Message CreateGroupMessage(string text, Group group)
+        {
+            var message = new Message(group, this, text);
+            group.messages.Add(message);
+            //Messages.Add(message);
+            return message;
+        }
         public Message CreateMessage(string text, Account to)
         {
             var message = new Message(this, to, text);
             Messages.Add(message);
             return message;
         }
-
+        public void Subscribe(Group group, int a)
+        {
+            if(a == 0)
+            {
+                group.groupMessage += GroupMessage;
+                group.members.Add(this);
+            }
+            else
+            {
+                group.groupMessage += AnonGroupMessage;
+                group.members.Add(this);
+            }
+        }
+        public void GroupMessage(object sender, OnSendEventArgs e)
+        {
+            ToConsole($"Group message from ({e.From}) - {e.Text}:\n ", ConsoleColor.Green);
+        }
+        public void AnonGroupMessage(object sender, OnSendEventArgs e)
+        {
+            ToConsole($"Group message: {e.Text}:\n ", ConsoleColor.Green);
+        }
         public void Send(Message message)
         {
             message.Send = true;

@@ -10,6 +10,7 @@ namespace IteaDelegates.IteaMessanger
         public Account To { get; set; }
         public bool Read { get; set; }
         public bool Send { get; set; }
+        public Group Group { get; set; }
         public DateTime Created { get; private set; } 
 
         public string Preview
@@ -28,11 +29,23 @@ namespace IteaDelegates.IteaMessanger
             Read = false; //?
             Created = DateTime.Now;
         }
-
+        public Message(Group group, Account from, string text)
+        {
+            Group = group;
+            From = from;
+            this.text = text;
+            Read = false; //?
+            Created = DateTime.Now;
+        }
         public string ReadMessage(Account account)
         {
             Read = true;
             return (To == account || From == account) ? text : string.Empty;
+        }
+        public string ReadMessage(Group group)
+        {
+            Read = true;
+            return (Group == group) ? text : string.Empty;
         }
     }
 }
