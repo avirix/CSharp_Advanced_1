@@ -91,6 +91,9 @@ namespace IteaLinq
 
             Console.WriteLine(people.Aggregate((x, y) =>
                 new Person(x.Name + y.Name, Gender.etc, x.Age + y.Age, x.Email + y.Email)).ToString());
+
+            var a = Console.ReadLine();
+            Console.WriteLine(a);
         }
 
         #region Create people list

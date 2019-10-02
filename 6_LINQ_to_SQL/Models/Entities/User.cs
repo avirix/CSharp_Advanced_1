@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using IteaLinqToSql.Models.Interfaces;
+
 namespace IteaLinqToSql.Models.Entities
 {
-    public class User
+    public class User : IIteaModel
     {
         [Key] public int Id { get; set; }
         public string Username { get; set; }

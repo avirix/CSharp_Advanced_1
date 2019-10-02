@@ -1,4 +1,7 @@
 ﻿using IteaLinqToSql.Models.Database;
+using IteaLinqToSql.Models.Entities;
+using IteaLinqToSql.Models.Interfaces;
+using IteaLinqToSql.Services;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,7 +28,10 @@ namespace _6_LINQ_to_SQL
                 options.UseSqlServer(Configuration.GetConnectionString("SQLConnectionString"))
             );
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddTransient<IService<User>, UserService>();
+
+            services.AddMvc(options => { options.AllowEmptyInputInBodyModelBinding = true; })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

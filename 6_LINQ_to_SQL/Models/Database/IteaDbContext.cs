@@ -1,4 +1,5 @@
 ﻿using IteaLinqToSql.Models.Entities;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace IteaLinqToSql.Models.Database
