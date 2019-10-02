@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace IteaDelegates.IteaMessanger
 {
@@ -16,7 +17,8 @@ namespace IteaDelegates.IteaMessanger
         {
             get
             {
-                return $"{text.Substring(0, 10)}...";
+                int[] pview = { 10, text.Length};
+                return $"{text.Substring(0, pview.Min())}...";
             }
         }
 
