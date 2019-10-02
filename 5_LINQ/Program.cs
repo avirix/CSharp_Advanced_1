@@ -10,6 +10,7 @@ namespace IteaLinq
     {
         static void Main(string[] args)
         {
+            /*
             List<Person> people = GetPeople().ToList();
 
             foreach (Person x in people)
@@ -50,8 +51,49 @@ namespace IteaLinq
                 Age = 21
             };
 
+            var anon1 = new
+            {
+                Name = "Anon",
+                Age = ""
+            };
 
-            ToConsole(anon.Name);
+            ToConsole(anon.Age.GetType().Name);
+            ToConsole(anon1.Age.GetType().Name);
+            */
+            List<Person> people = new List<Person>
+            {
+                new Person("Pol", Gender.Man, 37, "pol@gmail.com"),
+                new Person("Ann", Gender.Woman, 25, "ann@yahoo.com"),
+                new Person("Alex", Gender.Man, 21, "alex@gmail.com"),
+                new Person("Harry", Gender.Man, 58, "harry@yahoo.com"),
+                new Person("Germiona", Gender.Woman, 18, "germiona@gmail.com"),
+                new Person("Ron", Gender.Man, 24, "ron@yahoo.com"),
+                new Person("Etc1", Gender.etc, 42, "etc1@yahoo.com"),
+                new Person("Etc2", Gender.etc, 42, "etc2@gmail.com"),
+            };
+
+            var men = people.Where(x => x.Gender == Gender.Man);
+            //men.ToList().ForEach(x => ToConsole(x.ToString()));
+            men.ShowAll()
+                .Select(x => new { x.Email, x.Age })
+                .Where(x => x.Age > 30)
+                .ShowAll();
+
+            var groups = people?
+                 .GroupBy(x => x.Gender)
+                 .Where(g => g.Key != Gender.etc)
+                 .SelectMany(g => g)
+                 .Where(x => x.Age <= 25 && x.Email.Contains("yahoo"))
+                 .ShowAll();
+
+            var ints = new List<int> { 1, 2, 3, 4, 5 };
+            Console.WriteLine(ints.Aggregate((x, y) => x * y));
+
+            Console.WriteLine(people.Aggregate((x, y) =>
+                new Person(x.Name + y.Name, Gender.etc, x.Age + y.Age, x.Email + y.Email)).ToString());
+
+            var a = Console.ReadLine();
+            Console.WriteLine(a);
         }
 
         #region Create people list

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ITEA_Collections.Common
 {
@@ -16,6 +18,12 @@ namespace ITEA_Collections.Common
             Console.ForegroundColor = color;
             Console.Write(obj);
             Console.ResetColor();
+        }
+
+        public static IEnumerable<T> ShowAll<T>(this IEnumerable<T> ts) where T : class
+        {
+            ts.ToList().ForEach(x => ToConsole($"  {x.ToString()}", ConsoleColor.Cyan));
+            return ts;
         }
     }
 }
