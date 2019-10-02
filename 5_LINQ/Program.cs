@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using static ITEA_Collections.Common.Extensions;
+using IteaDelegates.IteaMessanger;
 
 namespace IteaLinq
 {
@@ -59,7 +60,7 @@ namespace IteaLinq
 
             ToConsole(anon.Age.GetType().Name);
             ToConsole(anon1.Age.GetType().Name);
-            */
+            
             List<Person> people = new List<Person>
             {
                 new Person("Pol", Gender.Man, 37, "pol@gmail.com"),
@@ -93,7 +94,35 @@ namespace IteaLinq
                 new Person(x.Name + y.Name, Gender.etc, x.Age + y.Age, x.Email + y.Email)).ToString());
 
             var a = Console.ReadLine();
-            Console.WriteLine(a);
+            Console.WriteLine(a);*/
+            Account alice = new Account("Alice");
+            Account eva = new Account("Eva");
+            Account bob = new Account("Bob");
+            Account mrmajor = new Account("MrMajor");
+            alice.Send(alice.CreateMessage("p=23, g=5, B=19", bob));
+            alice.Send(alice.CreateMessage("p=23, g=5, B=19", eva));
+            bob.Send(bob.CreateMessage("A=8", alice));
+            bob.Send(bob.CreateMessage("A=8", eva));
+            eva.Send(eva.CreateMessage("Crypto using detecred p=23, g=5, B=19, A=8", mrmajor));
+            mrmajor.Send(mrmajor.CreateMessage("Accepted", eva));
+            alice.Send(alice.CreateMessage("asldGHNMASDHASDHjasjdadakawasd", bob));
+            alice.Send(alice.CreateMessage("asldGHNMASDHASDHjasjdadakawasd", eva));
+            eva.Send(eva.CreateMessage("Eva send to BOB message asldGHNMASDHASDHjasjdadakawasd", mrmajor));
+            mrmajor.Send(mrmajor.CreateMessage("I can't decrypt it", eva));
+            eva.Send(eva.CreateMessage("Very bad", mrmajor));
+            List<Account> allacc = new List<Account> { alice, bob, eva, mrmajor };
+            ToConsole("Grouping Alice message", ConsoleColor.DarkYellow);
+            alice.Messages.GroupBy(m => m.To).Select(g => new { g.Key.Username, Count = g.Count()}).ShowAll();
+            ToConsole("Top message users", ConsoleColor.DarkYellow);
+            allacc.Select(x => new { x.Username, Count = x.Messages.Count() }).OrderByDescending(x=>x.Count).Take(3).ShowAll();
+            Console.WriteLine("Please enter a username");
+            string checkacc = Console.ReadLine();
+            allacc.Where(x => x.Username == checkacc)
+                .SelectMany(x => x.Messages)
+                .OrderBy(i => i.Created)
+                .Select(x=>x.ReadMessage(allacc.Where(i=>i.Username==checkacc).First()))
+                .ShowAll();
+                //.Select(x => new { Messages = x.Messages.OrderBy(i => i.Created).ToArray() }).ShowAll();
         }
 
         #region Create people list

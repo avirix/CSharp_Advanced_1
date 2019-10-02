@@ -8,5 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\1_Collections\1_Collections.csproj" />
+    <ProjectReference Include="..\4_Delegates\4_Delegates.csproj" />
   </ItemGroup>
 </Project>
