@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using IteaDelegates.IteaMessanger;
 using static ITEA_Collections.Common.Extensions;
 
 namespace IteaLinq
@@ -10,6 +10,61 @@ namespace IteaLinq
     {
         static void Main(string[] args)
         {
+            HwHelper hwHelper = new HwHelper();
+            List<Account> accounts = hwHelper.CreateAccounts(50);
+            List<Group> groups = hwHelper.CreateGroups(accounts, 2, 10);
+            hwHelper.SendGroupMessages(groups);
+            hwHelper.SendMessagesToAccs(accounts);
+            accounts[0].Messages
+                .GroupBy(x => x.To.Username)
+                .ToList()
+                .ForEach(y => ToConsole($"{ y.Key} --- {y.Count()}"));
+            groups[0].messages
+                .GroupBy(m => m.From.Username)
+                .OrderBy(m => m.Key)
+                .ToList()
+                .Take(3)
+                .ToList()
+                .ForEach(k => ToConsole($"{k.Key} -- {k.Count()}", ConsoleColor.Cyan));
+            Console.WriteLine("Enter user name: ");
+            try
+            {
+                string name = Console.ReadLine();
+                groups[0].messages
+                    .Where(m => m.From.Username == name)
+                    .OrderBy(m => m.Created)
+                    .ToList()
+                    .ForEach(k => ToConsole($"{k.Preview}", ConsoleColor.Red));
+            }catch(Exception io)
+            {
+                Console.WriteLine("Invalid input");
+            }
+
+                //members
+                //.Where(m => m.Username == name)
+                //.ToList
+                //.Where(m=> m
+                //.GroupBy(n=> n.To. == "GROUP0"))
+                //.ForEach(n => n.Messages
+                //            .OrderBy(mes => mes.Created)
+                //            .ToList()
+                //            .ForEach(mese => Console.WriteLine($"aaa{mese.Preview}")));
+            //SpyNotifications spy = new SpyNotifications(group);
+            //   Account a2 = new Account("Ron");
+            // a2.Subscribe(group, 1);
+            //group.GroupMessage(a1.CreateGroupMessage("A1", group));
+            //group.GroupMessage(a1.CreateGroupMessage("A1", group));
+            //group.GroupMessage(a1.CreateGroupMessage("A1", group));
+            //group.GroupMessage(a2.CreateGroupMessage("A2", group));
+            //group.GroupMessage(a1.CreateGroupMessage("A1", group));
+            //group.GroupMessage(a2.CreateGroupMessage("A2", group));
+            //group.GroupMessage(a1.CreateGroupMessage("A1", group));
+            //group.GroupMessage(a2.CreateGroupMessage("A2", group));
+            //group.GroupMessage(a4.CreateGroupMessage("A4", group));
+            //group.GroupMessage(a5.CreateGroupMessage("A5", group));
+
+            // group.ShowDialog("GROUP");
+
             /*
             List<Person> people = GetPeople().ToList();
 
@@ -58,8 +113,10 @@ namespace IteaLinq
             };
 
             ToConsole(anon.Age.GetType().Name);
-            ToConsole(anon1.Age.GetType().Name);
-            */
+            ToConsole(anon1.Age.GetType().Name
+
+ 
+            
             List<Person> people = new List<Person>
             {
                 new Person("Pol", Gender.Man, 37, "pol@gmail.com"),
@@ -94,6 +151,7 @@ namespace IteaLinq
 
             var a = Console.ReadLine();
             Console.WriteLine(a);
+            */
         }
 
         #region Create people list
@@ -118,6 +176,7 @@ namespace IteaLinq
             predicate(f);
             func(f, s);
         }
+         
 
+        }
     }
-}
