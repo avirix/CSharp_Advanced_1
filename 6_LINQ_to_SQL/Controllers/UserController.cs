@@ -5,6 +5,7 @@ using IteaLinqToSql.Models.Entities;
 using IteaLinqToSql.Models.Interfaces;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IteaLinqToSql.Controllers
 {
@@ -22,7 +23,11 @@ namespace IteaLinqToSql.Controllers
         [HttpGet]
         public List<User> Get()
         {
-            return service.GetAll();
+            return service
+                .GetQuery()
+                .Include(x => x.Logins)
+                .Where(x => x.Id > 1)
+                .ToList();
         }
 
         [HttpGet("{id}")]

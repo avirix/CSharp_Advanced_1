@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace _6_LINQ_to_SQL
+namespace IteaLinqToSql
 {
     public class Program
     {

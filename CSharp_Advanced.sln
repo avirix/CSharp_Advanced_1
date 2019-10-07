@@ -17,9 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3_Generics", "3_Generics\3_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4_Delegates", "4_Delegates\4_Delegates.csproj", "{178929C8-B67A-4726-9339-F27DE5DBAF2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5_LINQ", "5_LINQ\5_LINQ.csproj", "{C0C85AAA-5B7B-43C1-A36E-7A799BA60C6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5_LINQ", "5_LINQ\5_LINQ.csproj", "{C0C85AAA-5B7B-43C1-A36E-7A799BA60C6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6_LINQ_to_SQL", "6_LINQ_to_SQL\6_LINQ_to_SQL.csproj", "{60F32A21-0FC6-4EE6-B70D-E22D29236B5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "6_LINQ_to_SQL", "6_LINQ_to_SQL\6_LINQ_to_SQL.csproj", "{60F32A21-0FC6-4EE6-B70D-E22D29236B5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7_Serialization", "7_Serialization\7_Serialization.csproj", "{796D44CB-7566-418F-A9A4-B15C88006AC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{60F32A21-0FC6-4EE6-B70D-E22D29236B5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60F32A21-0FC6-4EE6-B70D-E22D29236B5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60F32A21-0FC6-4EE6-B70D-E22D29236B5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{796D44CB-7566-418F-A9A4-B15C88006AC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{796D44CB-7566-418F-A9A4-B15C88006AC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{796D44CB-7566-418F-A9A4-B15C88006AC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{796D44CB-7566-418F-A9A4-B15C88006AC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

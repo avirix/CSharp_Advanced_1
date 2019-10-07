@@ -20,9 +20,10 @@ namespace ITEA_Collections.Common
             Console.ResetColor();
         }
 
-        public static IEnumerable<T> ShowAll<T>(this IEnumerable<T> ts) where T : class
+        public static IEnumerable<T> ShowAll<T>(this IEnumerable<T> ts, string separator = "\n")
         {
-            ts.ToList().ForEach(x => ToConsole($"  {x.ToString()}", ConsoleColor.Cyan));
+            ts.ToList().ForEach(x => ToConsoleLine($"  {x.ToString()}{separator}", ConsoleColor.Cyan));
+            ToConsoleLine("\n");
             return ts;
         }
     }

@@ -10,7 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace _6_LINQ_to_SQL
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
+namespace IteaLinqToSql
 {
     public class Startup
     {
@@ -31,6 +34,11 @@ namespace _6_LINQ_to_SQL
             services.AddTransient<IService<User>, UserService>();
 
             services.AddMvc(options => { options.AllowEmptyInputInBodyModelBinding = true; })
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
