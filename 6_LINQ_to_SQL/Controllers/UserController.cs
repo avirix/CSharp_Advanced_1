@@ -5,6 +5,7 @@ using IteaLinqToSql.Models.Entities;
 using IteaLinqToSql.Models.Interfaces;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace IteaLinqToSql.Controllers
 {
@@ -20,9 +21,15 @@ namespace IteaLinqToSql.Controllers
         }
 
         [HttpGet]
-        public List<User> Get()
+        public List<User> Get(LoginHistory history)
         {
-            return service.GetAll();
+            return service.GetAll()
+                    .ToList();
+                
+                //.OrderByDescending(x=> x.Id)
+                //.ToList();
+                //.Where(x=> x.Id<2)
+                //.ToList();
         }
 
         [HttpGet("{id}")]

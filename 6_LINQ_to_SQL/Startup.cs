@@ -29,6 +29,7 @@ namespace _6_LINQ_to_SQL
             );
 
             services.AddTransient<IService<User>, UserService>();
+            services.AddTransient<IService<LoginHistory>, LoginHistoryService>();
 
             services.AddMvc(options => { options.AllowEmptyInputInBodyModelBinding = true; })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
