@@ -8,6 +8,11 @@ namespace IteaDelegates.IteaMessanger
 {
     public delegate void OnMessage(Message message);
     public delegate void OnSend(object sender, OnSendEventArgs e);
+    public enum GroupNotification
+    {
+        AUTHORNAME,
+        GROUPNAME
+    }
 
     public class Account
     {
@@ -41,9 +46,9 @@ namespace IteaDelegates.IteaMessanger
             Messages.Add(message);
             return message;
         }
-        public void Subscribe(Group group, int a)
+        public void Subscribe(Group group, GroupNotification groupNotification)
         {
-            if(a == 0)
+            if(groupNotification == GroupNotification.AUTHORNAME)
             {
                 group.groupMessage += GroupMessage;
                 group.members.Add(this);

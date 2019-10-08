@@ -11,7 +11,7 @@ namespace IteaDelegates.IteaMessanger
         public List<Account> members = new List<Account>();
         public List<Message> messages = new List<Message>();
         public event OnSend groupMessage;
-        private Group()
+        protected Group()
         {
 
         }

@@ -11,7 +11,7 @@ namespace IteaDelegates
             Group group = new Group(a1, "GROUP");
             SpyNotifications spy = new SpyNotifications(group);
             Account a2 = new Account("Ron");
-            a2.Subscribe(group, 1);
+            a2.Subscribe(group, GroupNotification.AUTHORNAME);
             group.GroupMessage(a1.CreateGroupMessage("I'm Alex, from Kyiv", group));
             group.GroupMessage(a2.CreateGroupMessage("Hi, Alex! I'm from Lviv", group));
             group.ShowDialog("GROUP");
