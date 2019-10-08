@@ -8,7 +8,6 @@ namespace StrategyGame.Buildings
 
     public class Barracks
     {
-
         public readonly Dictionary<Type, int> warriorsCost = new Dictionary<Type, int>
         {
              {typeof(Pikeman), 11},

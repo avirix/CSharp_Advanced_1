@@ -20,5 +20,9 @@ namespace StrategyGame.Warriors.Abstractions
             Strength = strength;
             UnitType = unitType;
         }
+
+        public abstract void MeleeAttack(IUnit unit);
+
+        public virtual string Unnamed() => "Chaaaarge!";
     }
 }
