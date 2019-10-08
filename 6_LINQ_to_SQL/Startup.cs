@@ -28,7 +28,13 @@ namespace IteaLinqToSql
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<IteaDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SQLConnectionString"))
+                options.UseSqlServer(
+#if DEBUG
+                    Configuration.GetConnectionString("SQLConnectionString")
+#else
+                    Configuration.GetConnectionString("SQLConnectionString_Release")
+#endif
+                    )
             );
 
             services.AddTransient<IService<User>, UserService>();

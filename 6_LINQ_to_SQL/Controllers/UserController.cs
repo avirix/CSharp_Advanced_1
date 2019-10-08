@@ -20,7 +20,7 @@ namespace IteaLinqToSql.Controllers
             this.service = service;
         }
 
-        [HttpGet]
+        [HttpGet("/get")]
         public List<User> Get()
         {
             return service
@@ -36,7 +36,7 @@ namespace IteaLinqToSql.Controllers
             return service.FindById(id);
         }
 
-        [HttpPost]
+        [HttpPost("save")]
         public List<User> Post([FromBody] User value)
         {
             return service

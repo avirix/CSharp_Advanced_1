@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace IteaSerialization
 {
@@ -10,21 +11,23 @@ namespace IteaSerialization
     }
 
     [Serializable]
-    public class Person
+    public class Person : IModel
     {
-        public Guid Guid { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public Gender Gender { get; set; }
         public int Age { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
+        [JsonIgnore]
+        public Company Company { get; set; }
 
         protected Person() { }
 
         public Person(string name, int age)
         {
-            Guid = Guid.NewGuid();
+            Id = Guid.NewGuid();
             Name = name;
             Age = age;
         }
@@ -36,9 +39,19 @@ namespace IteaSerialization
             Email = email;
         }
 
+        /// <summary>
+        /// Set company for person
+        /// </summary>
+        /// <param name="company">Company to set</param>
+        public void SetCompany(Company company)
+        {
+            Company = company;
+            Company.People.Add(this);
+        }
+
         public override string ToString()
         {
-            return $"{Guid.ToString().Substring(0, 5)}_{Name}: {Gender}, {Age}, {Email}";
+            return $"{Id.ToString().Substring(0, 5)}_{Name}: {Gender}, {Age}, {Email}";
         }
 
         public override int GetHashCode()
