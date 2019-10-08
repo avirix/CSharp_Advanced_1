@@ -10,6 +10,7 @@ namespace IteaLinq
     {
         static void Main(string[] args)
         {
+            #region Homework
             HwHelper hwHelper = new HwHelper();
             List<Account> accounts = hwHelper.CreateAccounts(50);
             List<Group> groups = hwHelper.CreateGroups(accounts, 2, 10);
@@ -39,16 +40,17 @@ namespace IteaLinq
             {
                 Console.WriteLine("Invalid input");
             }
-
-                //members
-                //.Where(m => m.Username == name)
-                //.ToList
-                //.Where(m=> m
-                //.GroupBy(n=> n.To. == "GROUP0"))
-                //.ForEach(n => n.Messages
-                //            .OrderBy(mes => mes.Created)
-                //            .ToList()
-                //            .ForEach(mese => Console.WriteLine($"aaa{mese.Preview}")));
+            #endregion
+            #region ClassWork
+            //members
+            //.Where(m => m.Username == name)
+            //.ToList
+            //.Where(m=> m
+            //.GroupBy(n=> n.To. == "GROUP0"))
+            //.ForEach(n => n.Messages
+            //            .OrderBy(mes => mes.Created)
+            //            .ToList()
+            //            .ForEach(mese => Console.WriteLine($"aaa{mese.Preview}")));
             //SpyNotifications spy = new SpyNotifications(group);
             //   Account a2 = new Account("Ron");
             // a2.Subscribe(group, 1);
@@ -152,6 +154,7 @@ namespace IteaLinq
             var a = Console.ReadLine();
             Console.WriteLine(a);
             */
+            #endregion
         }
 
         #region Create people list
@@ -175,8 +178,6 @@ namespace IteaLinq
             action(f, s);
             predicate(f);
             func(f, s);
-        }
-         
-
+        }        
         }
     }

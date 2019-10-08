@@ -7,10 +7,7 @@ namespace IteaLinq
 {
    public class HwHelper
     {
-        public HwHelper()
-        {
-
-        }
+        public HwHelper() { }
         public List<Account> CreateAccounts(int count)
         {
             List<Account> accounts = new List<Account>();

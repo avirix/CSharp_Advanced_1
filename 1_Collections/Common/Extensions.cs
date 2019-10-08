@@ -22,7 +22,7 @@ namespace ITEA_Collections.Common
 
         public static IEnumerable<T> ShowAll<T>(this IEnumerable<T> ts) where T : class
         {
-            ts.ToList().ForEach(x => ToConsole($"  {x}", ConsoleColor.Cyan));
+            ts.ToList().ForEach(x => ToConsole($"  {x.ToString()}", ConsoleColor.Cyan));
             return ts;
         }
     }
