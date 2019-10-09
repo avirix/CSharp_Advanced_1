@@ -47,18 +47,11 @@ namespace IteaSerialization
         {
             return $"{Id.ToString().Substring(0, 5)}_{Name}: {Gender}, {Age}, {Email}";
         }
-    //    public override bool Equals(object obj)
-    //    {
-    //        Person person = (Person)obj;
-    //        if (Id == person.Id &&
-    //            Name == person.Name &&
-    //            Gender == person.Gender &&
-    //            Age == person.Age &&
-    //            Email == person.Email)
-    //            return true;
-    //        else
-    //            return false;
-    //}
+        public override bool Equals(object obj)
+        {
+            var person = obj as Person;
+            return person == null ? false : person.Name == Name;
+        }
         public override int GetHashCode()
         {
             return base.GetHashCode();

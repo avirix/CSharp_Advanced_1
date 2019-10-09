@@ -19,15 +19,10 @@ namespace IteaSerialization
         {
             People.Add(person);
         }
-        //public override bool Equals(object obj)
-        //{
-        //    Department department = (Department)obj;
-        //    if (Id == department.Id &&
-        //        Name == department.Name &&
-        //        People.Count == department.People.Count)
-        //        return true;
-        //    else
-        //        return false;
-        //}
+        public override bool Equals(object obj)
+        {
+            var department = obj as Department;
+            return department == null ? false : department.Name == Name;
+        }
     }
 }

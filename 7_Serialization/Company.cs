@@ -17,17 +17,12 @@ namespace IteaSerialization
             Id = Guid.NewGuid();
             Name = name;
         }
-        //public override bool Equals(object obj)
-        //{
-        //        Company company = (Company)obj;
-        //        if (Id == company.Id &&
-        //            Name == company.Name &&
-        //            Departments.Count == company.Departments.Count)
-        //            return true;
-        //        else
-        //            return false;
-            
-        //}
+        public override bool Equals(object obj)
+        {
+            var company = obj as Company;
+            return company == null ? false : company.Name == Name;
+
+        }
         public void CreateDepartment(int count)
         {
             for (int i = 0; i < count; i++)

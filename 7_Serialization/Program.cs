@@ -45,34 +45,24 @@ namespace IteaSerialization
             people.ForEach(x => {
                 if (x.Gender == Gender.Man)
                 {
-                   // x.SetCompany(microsoft);
                     microsoft.Departments[0].Hire(x);
                 }
                 else if(x.Gender == Gender.Woman)
                 {
-                    //x.SetCompany(microsoft);
                     microsoft.Departments[1].Hire(x);
                 }
                 else
                 {
-                    //x.SetCompany(microsoft);
                     microsoft.Departments[2].Hire(x);
                 }
             }) ;
 
-            //XmlSerialize("exampleXml", person);
             JsonSerialize("microsoftJson", microsoft);
 
-            //JsonSerialize("appleJson", apple);
             Company microsoftFromFile = JsonDeserialize("microsoftJson");
-            ToConsole(microsoftFromFile.Equals(microsoft), ConsoleColor.Red);  // false
+            ToConsole(microsoftFromFile.Equals(microsoft), ConsoleColor.Red);  // true
             ToConsole(microsoftFromFile.Id == microsoft.Id &&
                 microsoftFromFile.Departments.Count == microsoft.Departments.Count, ConsoleColor.Green); //true
-
-            //JsonSerialize("appleJson", microsoft);
-            //Company appleFromFile = JsonDeserialize("microsoftJson");
-            //ToConsole(appleFromFile.Id == apple.Id &&
-            //    appleFromFile.People.Count == apple.People.Count);
 
 #endif
         }
@@ -93,19 +83,19 @@ namespace IteaSerialization
             }
         }
 
-        public static void JsonSerialize(string path, Company company)
+        public static void JsonSerialize<T>(string path, T obj) where T : class 
         {
             using (var fs = new FileStream($"{path}.json", FileMode.OpenOrCreate))
             {
-                string strObj = JsonConvert.SerializeObject(company);
+                string strObj = JsonConvert.SerializeObject(obj);
                 byte[] data = strObj
                     .Select(x => (byte)x)
                     .ToArray();
                 fs.Write(data, 0, data.Length);
-                //strObj
-                //    .Split(",")
-                //    .ToList()
-                //    .ForEach(x => ToConsole($"{x},", ConsoleColor.Green));
+                strObj
+                    .Split(",")
+                    .ToList()
+                    .ForEach(x => ToConsole($"{x},", ConsoleColor.Green));
             }
         }
 
