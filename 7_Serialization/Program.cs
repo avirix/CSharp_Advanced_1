@@ -31,25 +31,42 @@ namespace IteaSerialization
                 new Person("Germiona", Gender.Woman, 18, "germiona@gmail.com"),
                 new Person("Ron", Gender.Man, 24, "ron@yahoo.com"),
                 new Person("Etc1", Gender.etc, 42, "etc1@yahoo.com"),
+                new Person("Crystal", Gender.Woman, 24, "crystal@yahoo.com"),
+                new Person("Etc3", Gender.etc, 41, "etc3@yahoo.com"),
+                new Person("Rony", Gender.Man, 27, "rony@yahoo.com"),
+                new Person("Etc4", Gender.etc, 44, "etc4@yahoo.com"),
                 new Person("Etc2", Gender.etc, 42, "etc2@gmail.com"),
             };
 
             Company microsoft = new Company("Microsoft");
-            Company apple = new Company("Apple");
+            microsoft.CreateDepartment(3);
+            //Company apple = new Company("Apple");
 
             people.ForEach(x => {
-                if (x.Age < people.Average(a => a.Age))
-                    x.SetCompany(microsoft);
+                if (x.Gender == Gender.Man)
+                {
+                   // x.SetCompany(microsoft);
+                    microsoft.Departments[0].Hire(x);
+                }
+                else if(x.Gender == Gender.Woman)
+                {
+                    //x.SetCompany(microsoft);
+                    microsoft.Departments[1].Hire(x);
+                }
                 else
-                    x.SetCompany(apple);
+                {
+                    //x.SetCompany(microsoft);
+                    microsoft.Departments[2].Hire(x);
+                }
             }) ;
 
             //XmlSerialize("exampleXml", person);
             JsonSerialize("microsoftJson", microsoft);
-            JsonSerialize("appleJson", apple);
-            Company appleFromFile = JsonDeserialize("appleJson");
-            ToConsole(appleFromFile.Id == apple.Id &&
-                appleFromFile.People.Count == apple.People.Count);
+            //JsonSerialize("appleJson", apple);
+            Company microsoftFromFile = JsonDeserialize("microsoftJson");
+            ToConsole(microsoftFromFile.Equals(microsoft));
+            //ToConsole(appleFromFile.Id == apple.Id &&
+            //    appleFromFile.People.Count == apple.People.Count);
 #endif
         }
 
@@ -69,19 +86,19 @@ namespace IteaSerialization
             }
         }
 
-        public static void JsonSerialize<T>(string path, T obj) where T : class
+        public static void JsonSerialize(string path, Company company)
         {
             using (var fs = new FileStream($"{path}.json", FileMode.OpenOrCreate))
             {
-                string strObj = JsonConvert.SerializeObject(obj);
+                string strObj = JsonConvert.SerializeObject(company);
                 byte[] data = strObj
                     .Select(x => (byte)x)
                     .ToArray();
                 fs.Write(data, 0, data.Length);
-                strObj
-                    .Split(",")
-                    .ToList()
-                    .ForEach(x => ToConsole($"{x},", ConsoleColor.Green));
+                //strObj
+                //    .Split(",")
+                //    .ToList()
+                //    .ForEach(x => ToConsole($"{x},", ConsoleColor.Green));
             }
         }
 

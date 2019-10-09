@@ -20,8 +20,8 @@ namespace IteaSerialization
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
-        [JsonIgnore]
-        public Company Company { get; set; }
+      //  [JsonIgnore]
+ //       public Company Company { get; set; }
 
         protected Person() { }
 
@@ -45,15 +45,26 @@ namespace IteaSerialization
         /// <param name="company">Company to set</param>
         public void SetCompany(Company company)
         {
-            Company = company;
-            Company.People.Add(this);
+          //  Company = company;
+           // Company.People.Add(this);
         }
 
         public override string ToString()
         {
             return $"{Id.ToString().Substring(0, 5)}_{Name}: {Gender}, {Age}, {Email}";
         }
-
+        public override bool Equals(object obj)
+        {
+            Person person = (Person)obj;
+            if (Id == person.Id &&
+                Name == person.Name &&
+                Gender == person.Gender &&
+                Age == person.Age &&
+                Email == person.Email)
+                return true;
+            else
+                return false;
+    }
         public override int GetHashCode()
         {
             return base.GetHashCode();
