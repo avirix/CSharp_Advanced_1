@@ -7,7 +7,7 @@ namespace IteaSerialization
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<Person> People { get; set; } = new List<Person>();
+        public Division RootDivision { get; private set; }
 
         protected Company() { }
 
@@ -15,6 +15,31 @@ namespace IteaSerialization
         {
             Id = Guid.NewGuid();
             Name = name;
+            RootDivision = new Division("root", this);
+        }
+        public int EmployeesCount()
+        {
+            return RootDivision.EmployeesCount();
+        }
+
+        public Division AddDivision(string name) {
+            Division division = new Division(name, this,RootDivision);
+            return division;
+        }
+
+        public Division AddDivision(string name, Division parent) {
+            Division division = new Division(name, this,parent);
+            return division;
+        }
+        public void AddEmployee(Person person) => person.SetDivision(RootDivision);
+
+
+        public void AddEmployee(Person person, Division division) => person.SetDivision(division);
+
+        public override bool Equals(object obj) => !(obj is Company company) ? false : company.Id == Id;
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
