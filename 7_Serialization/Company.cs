@@ -8,30 +8,26 @@ namespace IteaSerialization
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        [JsonIgnore]
         public List<Department> Departments { get; set; } = new List<Department>();
 
         protected Company() { }
 
         public Company(string name)
         {
-           // Id = Guid.NewGuid();
+            Id = Guid.NewGuid();
             Name = name;
         }
         //public override bool Equals(object obj)
         //{
-        //    return base.Equals(obj);
+        //        Company company = (Company)obj;
+        //        if (Id == company.Id &&
+        //            Name == company.Name &&
+        //            Departments.Count == company.Departments.Count)
+        //            return true;
+        //        else
+        //            return false;
+            
         //}
-        public override bool Equals(object obj)
-        {
-            Company company = (Company)obj;
-            if (Id == company.Id &&
-                Name == company.Name &&
-                Departments.Count == company.Departments.Count)
-                return true;
-            else
-                return false;
-        }
         public void CreateDepartment(int count)
         {
             for (int i = 0; i < count; i++)

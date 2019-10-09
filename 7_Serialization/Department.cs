@@ -8,9 +8,7 @@ namespace IteaSerialization
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<Person> People { get; set; } = new List<Person>();
-       
-
+        public List<Person> People { get; set; } = new List<Person>();     
         protected Department() { }
         public Department(string name)
         {
@@ -21,15 +19,15 @@ namespace IteaSerialization
         {
             People.Add(person);
         }
-        public override bool Equals(object obj)
-        {
-            Department department = (Department)obj;
-            if (Id == department.Id &&
-                Name == department.Name &&
-                People.Count == department.People.Count)
-                return true;
-            else
-                return false;
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    Department department = (Department)obj;
+        //    if (Id == department.Id &&
+        //        Name == department.Name &&
+        //        People.Count == department.People.Count)
+        //        return true;
+        //    else
+        //        return false;
+        //}
     }
 }

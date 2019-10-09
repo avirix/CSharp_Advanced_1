@@ -43,28 +43,22 @@ namespace IteaSerialization
         /// Set company for person
         /// </summary>
         /// <param name="company">Company to set</param>
-        public void SetCompany(Company company)
-        {
-          //  Company = company;
-           // Company.People.Add(this);
-        }
-
         public override string ToString()
         {
             return $"{Id.ToString().Substring(0, 5)}_{Name}: {Gender}, {Age}, {Email}";
         }
-        public override bool Equals(object obj)
-        {
-            Person person = (Person)obj;
-            if (Id == person.Id &&
-                Name == person.Name &&
-                Gender == person.Gender &&
-                Age == person.Age &&
-                Email == person.Email)
-                return true;
-            else
-                return false;
-    }
+    //    public override bool Equals(object obj)
+    //    {
+    //        Person person = (Person)obj;
+    //        if (Id == person.Id &&
+    //            Name == person.Name &&
+    //            Gender == person.Gender &&
+    //            Age == person.Age &&
+    //            Email == person.Email)
+    //            return true;
+    //        else
+    //            return false;
+    //}
         public override int GetHashCode()
         {
             return base.GetHashCode();

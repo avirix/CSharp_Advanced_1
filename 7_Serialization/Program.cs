@@ -62,11 +62,18 @@ namespace IteaSerialization
 
             //XmlSerialize("exampleXml", person);
             JsonSerialize("microsoftJson", microsoft);
+
             //JsonSerialize("appleJson", apple);
             Company microsoftFromFile = JsonDeserialize("microsoftJson");
-            ToConsole(microsoftFromFile.Equals(microsoft));
+            ToConsole(microsoftFromFile.Equals(microsoft), ConsoleColor.Red);  // false
+            ToConsole(microsoftFromFile.Id == microsoft.Id &&
+                microsoftFromFile.Departments.Count == microsoft.Departments.Count, ConsoleColor.Green); //true
+
+            //JsonSerialize("appleJson", microsoft);
+            //Company appleFromFile = JsonDeserialize("microsoftJson");
             //ToConsole(appleFromFile.Id == apple.Id &&
             //    appleFromFile.People.Count == apple.People.Count);
+
 #endif
         }
 
