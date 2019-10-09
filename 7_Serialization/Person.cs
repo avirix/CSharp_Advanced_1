@@ -20,8 +20,10 @@ namespace IteaSerialization
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public Company Company { get; set; }
+        //[JsonIgnore]
+        public Division Division { get; set; }
 
         protected Person() { }
 
@@ -46,14 +48,30 @@ namespace IteaSerialization
         public void SetCompany(Company company)
         {
             Company = company;
-            Company.People.Add(this);
+            Company.RootDivision.Employees.Add(this);
+        }
+
+        public void RemoveDivision() {
+            Division.Employees.Remove(this);
+            Division = null;
+        }
+
+        public void SetDivision(Division division)
+        {
+            if (Division != null) Division.Employees.Remove(this);
+            Company = division.Company;
+            Division = division;
+            Division.Employees.Add(this);
         }
 
         public override string ToString()
         {
             return $"{Id.ToString().Substring(0, 5)}_{Name}: {Gender}, {Age}, {Email}";
         }
-
+        public override bool Equals(object obj)
+        {
+            return !(obj is Person person) ? false : person.Id == Id;
+        }
         public override int GetHashCode()
         {
             return base.GetHashCode();
