@@ -22,7 +22,7 @@ namespace IteaSerialization
             ToConsole(ReadFromFile("example.txt", ""));
             Person person = new Person("Alex", Gender.Man, 21, "alexs98@gmail.com");
 #else
-            List<Person> people = new List<Person>
+            /*List<Person> people = new List<Person>
             {
                 new Person("Pol", Gender.Man, 37, "pol@gmail.com"),
                 new Person("Ann", Gender.Woman, 25, "ann@yahoo.com"),
@@ -49,7 +49,34 @@ namespace IteaSerialization
             JsonSerialize("appleJson", apple);
             Company appleFromFile = JsonDeserialize("appleJson");
             ToConsole(appleFromFile.Id == apple.Id &&
-                appleFromFile.People.Count == apple.People.Count);
+                appleFromFile.People.Count == apple.People.Count);*/
+
+
+            Company rogaandkopyta = new Company("Roga & Kopyta");
+            Division porogam = rogaandkopyta.AddDivision("Po Rogam");
+            Division pokoptyam = rogaandkopyta.AddDivision("Po Kopytam");
+            Division finance = rogaandkopyta.AddDivision("Finance");
+            Division support = rogaandkopyta.AddDivision("Support", porogam);
+            rogaandkopyta.AddEmployee(new Person("Pol", Gender.Man, 37, "pol@gmail.com"));
+            rogaandkopyta.AddEmployee(new Person("Bertie", Gender.Man, 37, "bert@gmail.com"), porogam);
+            rogaandkopyta.AddEmployee(new Person("Alex", Gender.Man, 21, "alex@gmail.com"), porogam);
+            rogaandkopyta.AddEmployee(new Person("Reginald", Gender.Man, 50, "reginald@gmail.com"), porogam);
+            rogaandkopyta.AddEmployee(new Person("Tomm", Gender.Man, 32, "tomm@gmail.com"), pokoptyam);
+            rogaandkopyta.AddEmployee(new Person("Harry", Gender.Man, 27, "harry@gmail.com"), pokoptyam);
+            rogaandkopyta.AddEmployee(new Person("Ron", Gender.Man, 24, "ron@yahoo.com"), pokoptyam);
+            rogaandkopyta.AddEmployee(new Person("Leslie", Gender.Woman, 35, "leslie@gmail.com"), finance);
+            rogaandkopyta.AddEmployee(new Person("Galya", Gender.Woman, 48, "galya@gmail.com"), finance);
+            rogaandkopyta.AddEmployee(new Person("Ann", Gender.Woman, 25, "ann@yahoo.com"), support);
+            rogaandkopyta.AddEmployee(new Person("Germiona", Gender.Woman, 18, "germiona@gmail.com"), support);
+            JsonSerialize("hw7_sidorenko", rogaandkopyta);
+            ToConsole("Deserializing object", ConsoleColor.Blue);
+            Company rogafromfile = JsonDeserialize("hw7_sidorenko");
+            if (rogaandkopyta.Equals(rogafromfile)) { ToConsole("Companies are equal", ConsoleColor.Yellow); }
+            else { ToConsole("Companies are different", ConsoleColor.Yellow); }
+
+
+            
+
 #endif
         }
 
@@ -73,7 +100,11 @@ namespace IteaSerialization
         {
             using (var fs = new FileStream($"{path}.json", FileMode.OpenOrCreate))
             {
-                string strObj = JsonConvert.SerializeObject(obj);
+                string strObj = JsonConvert.SerializeObject(obj, new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
                 byte[] data = strObj
                     .Select(x => (byte)x)
                     .ToArray();
@@ -91,7 +122,11 @@ namespace IteaSerialization
             {
                 //var startMemory = GC.GetTotalMemory(true);
                 string dataStr = streamReader.ReadToEnd();
-                return JsonConvert.DeserializeObject<Company>(dataStr);
+                return JsonConvert.DeserializeObject<Company>(dataStr, new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
                 //var endMemory = GC.GetTotalMemory(true);
                 //Console.WriteLine($"Total memory: {endMemory - startMemory}");
             }
