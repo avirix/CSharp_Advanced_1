@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace ITEA_Collections.Common
 {
@@ -24,6 +25,12 @@ namespace ITEA_Collections.Common
         {
             ts.ToList().ForEach(x => ToConsoleLine($"  {x.ToString()}{separator}", ConsoleColor.Cyan));
             ToConsoleLine("\n");
+            return ts;
+        }
+
+        public static IEnumerable<T> Once<T>(this IEnumerable<T> ts, Action exp)
+        {
+            exp.Invoke();
             return ts;
         }
     }
