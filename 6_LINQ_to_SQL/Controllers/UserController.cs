@@ -20,7 +20,7 @@ namespace IteaLinqToSql.Controllers
             this.service = service;
         }
 
-        [HttpGet("/get")]
+        [HttpGet]
         public List<User> Get()
         {
             return service
