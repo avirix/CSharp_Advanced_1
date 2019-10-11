@@ -7,6 +7,12 @@ namespace ITEA_Collections.Common
 {
     public static class Extensions
     {
+        public static void ToConsole()
+        {
+            Console.WriteLine();
+            Console.ResetColor();
+        }
+
         public static void ToConsole(object obj, ConsoleColor color = ConsoleColor.White)
         {
             Console.ForegroundColor = color;
