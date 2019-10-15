@@ -18,6 +18,7 @@ namespace IteaSerialization
         public void Hire(Person person)
         {
             People.Add(person);
+            person.Department = this;
         }
         public override bool Equals(object obj)
         {

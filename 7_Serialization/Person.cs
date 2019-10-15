@@ -20,8 +20,8 @@ namespace IteaSerialization
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
-      //  [JsonIgnore]
- //       public Company Company { get; set; }
+        [JsonIgnore]
+        public Department Department {get;set;}
 
         protected Person() { }
 
