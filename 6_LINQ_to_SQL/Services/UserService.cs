@@ -22,7 +22,7 @@ namespace IteaLinqToSql.Services
         {
             Repository.Create(item);
         }
-        public async void CreateAsync(User item)
+        public async Task CreateAsync(User item)
         {
           await asyncRepository.CreateAsync(item);
         }

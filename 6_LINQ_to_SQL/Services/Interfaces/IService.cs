@@ -12,7 +12,7 @@ namespace IteaLinqToSql.Models.Interfaces
         T FindById(int id);
         Task<T> FindByIdAsync(int id);
         void Create(T item);
-        void CreateAsync(T item);
+        Task CreateAsync(T item);
         void Delete(T id);
         Task DeleteAsync(T id);
         T Update(int id, T updatedItem);
