@@ -14,15 +14,13 @@ namespace ITEA_Collections
         static void Main(string[] args)
         {
             #region Lesson
-            /*
             string[] numbers = new string[] { "1", "2", "3" };
             UseCollection(numbers);
             UseList(numbers);
             UseWeirdYield();
             
-            UseEnumerator(numbers);*/
-            //UseObservable();
-            /*
+            UseEnumerator(numbers);
+            UseObservable();
             UseWeirdYield();
             
             Dictionary<int, string> dict = new Dictionary<int, string>();
@@ -47,7 +45,6 @@ namespace ITEA_Collections
                 if (item.Key % 2 == 1)
                     ToConsoleLine($"{item.Value}; ");
             }
-            */
             #endregion
             IteaGenericLinkedList<string> iteaGeneric = new IteaGenericLinkedList<string>("First");
             Console.WriteLine(iteaGeneric[0]);
