@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using IteaLinqToSql.Models.Entities;
 using IteaLinqToSql.Models.Interfaces;
 
@@ -14,32 +14,34 @@ namespace IteaLinqToSql.Controllers
     public class UserController : ControllerBase
     {
         readonly IService<User> service;
+        readonly IService<User> asyncservice;
 
         public UserController(IService<User> service)
         {
             this.service = service;
+            this.asyncservice = service;
         }
 
         [HttpGet]
-        public List<User> Get()
+        public async Task<List<User>> Get()
         {
-            return service
+            return await asyncservice
                 .GetQuery()
                 .Include(x => x.Logins)
                 .Where(x => x.Id > 1)
-                .ToList();
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public User Get(int id)
+        public async Task<User> Get(int id)
         {
-            return service.FindById(id);
+            return await asyncservice.FindByIdAsync(id);
         }
 
         [HttpPost("save")]
         public List<User> Post([FromBody] User value)
         {
-            return service
+            return asyncservice
                 .GetAll()
                 .Where(x => x.Email.Contains(value.Email) ||
                             x.Username.Contains(value.Username) ||
