@@ -9,27 +9,27 @@ namespace IteaDelegates.IteaMessanger
     public delegate void OnMessage(Message message);
     public delegate void OnSend(object sender, OnSendEventArgs e);
 
-    public class Account
+    public class Account:Participant
     {
-        public string Username { get; private set; }
-        public List<Message> Messages { get; set; }
-
+        //public string Username { get; private set; }
+        //public List<Message> Messages { get; set; }
         public event OnSend OnSend;
 
-        public OnMessage NewMessage { get; set; } = delegate (Message message)  // (message)  =>
-        {
-            if (message.Send)
-                ToConsole($"{message.To.Username}, new message from {message.From.Username}:\n  {message.Preview}", ConsoleColor.Green);
-        };
 
-        public Account(string username)
+
+        public Account(string username):base(username)
         {
-            Username = username;
-            Messages = new List<Message>();
+            //Username = username;
+            //Messages = new List<Message>();
             //NewMessage += OnNewMessage;
         }
 
-        public Message CreateMessage(string text, Account to)
+        public Group CreateGroup(string groupname) {
+            Group group = new Group(groupname, this);
+            return group;
+        }
+
+        public Message CreateMessage(string text, Participant to)
         {
             var message = new Message(this, to, text);
             Messages.Add(message);
@@ -38,19 +38,19 @@ namespace IteaDelegates.IteaMessanger
 
         public void Send(Message message)
         {
-            message.Send = true;
-            message.To.Messages.Add(message);
-            message.To.NewMessage(message);
-            if(OnSend != null)
-                OnSend(this, new OnSendEventArgs(message.ReadMessage(this), message.From.Username, message.To.Username));
+            switch (message.To)
+            {
+                case Account acc:
+                    {
+                        message.Send = true;
+                        message.To.Messages.Add(message);
+                        //message.To.NewMessage(message);
+                        OnSend?.Invoke(this, new OnSendEventArgs(message.ReadMessage(this), message.From.Username, message.To.Username));
+                        break;
+                    }
+                case Group grp: { grp.Send(message); break; }
+            }
         }
-
-        public void OnNewMessage(Message message)
-        {
-            if (message.Send)
-                ToConsole($"OnNewMessage: {message.From.Username}: {message.Preview}", ConsoleColor.DarkYellow);
-        }
-
         public void ShowDialog(string username)
         {
             List<Message> messageDialog = Messages
@@ -67,5 +67,10 @@ namespace IteaDelegates.IteaMessanger
             }
             ToConsole($"---{string.Concat(str.Select(x => "-"))}---");
         }
+        public override string ToString()
+        {
+            return Username;
+        }
+
     }
 }
