@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace IteaDelegates.IteaMessanger
 {
@@ -7,7 +8,7 @@ namespace IteaDelegates.IteaMessanger
         readonly string text;
 
         public Account From { get; set; }
-        public Account To { get; set; }
+        public Participant To { get; set; }
         public bool Read { get; set; }
         public bool Send { get; set; }
         public DateTime Created { get; private set; } 
@@ -16,11 +17,12 @@ namespace IteaDelegates.IteaMessanger
         {
             get
             {
-                return $"{text.Substring(0, 10)}...";
+                int[] pview = { 10, text.Length };
+                return $"{text.Substring(0, pview.Min())}...";
             }
         }
 
-        public Message(Account from, Account to, string text)
+        public Message(Account from, Participant to, string text)
         {
             From = from;
             To = to;
